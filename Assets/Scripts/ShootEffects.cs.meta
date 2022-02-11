@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 3bf85e8771b294e4b9bbf438f5943682
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - casingPrefab: {instanceID: 0}
+  - muzzleFlashPrefab: {instanceID: 0}
+  - impactStandartEffect: {instanceID: 0}
+  - impactStoneEffect: {instanceID: 0}
+  - bulletHoleStoneEffect: {instanceID: 0}
+  - impactWoodEffect: {instanceID: 0}
+  - bulletHoleWoodEffect: {instanceID: 0}
+  - impactMetalEffect: {instanceID: 0}
+  - bulletHoleMetalEffect: {instanceID: 0}
+  - FPCharacter: {instanceID: 0}
+  - shotAudio: {fileID: 8300000, guid: f941d931cc76999478b4975b69038167, type: 3}
+  - noBulletsAudio: {fileID: 8300000, guid: 130496eebb7bef745ad3cb9a2ffa05d6, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
