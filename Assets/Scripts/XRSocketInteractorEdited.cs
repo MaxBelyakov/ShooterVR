@@ -1,3 +1,6 @@
+// Pistol socket interactor controller
+// Need to reload pistol just by pistol ammo (check by tag)
+
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class XRSocketInteractorEdited : XRSocketInteractor

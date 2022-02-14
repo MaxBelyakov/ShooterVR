@@ -57,7 +57,7 @@ public class Inventory : MonoBehaviour
         UpdateColor (s_bowItem, bow_ItemTexture, bow_ItemText);
 
         // Check for target
-        if (InspectTarget.targetInfo != null)
+        /*if (InspectTarget.targetInfo != null)
         {
             // Ask to take ammo
             if (InspectTarget.targetInfo.TargetItem == "pistol magazine ammo" 
@@ -181,7 +181,7 @@ public class Inventory : MonoBehaviour
                     this.GetComponent<AudioSource>().PlayOneShot(a_magazineTake);
                 }
             }
-        }
+        }*/
     }
 
     void UpdateColor(bool itemFlag, RawImage itemTexture, TMP_Text itemText)

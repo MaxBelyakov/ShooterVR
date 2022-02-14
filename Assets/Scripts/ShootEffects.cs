@@ -1,36 +1,58 @@
-/*
-General class that defines shoot effects (flash, impact, holes).
-Class is inherited by "MachineGunShoot" and "PistolShoot" classes
-*/
+// General class that defines shoot effects (flash, impact, holes).
+// Class is inherited by "MachineGunShoot" and "PistolShoot" classes
 
 using UnityEngine;
 using System.Collections.Generic;
 
 public class ShootEffects : MonoBehaviour
 {
-    public GameObject casingPrefab;
+    [SerializeField] private GameObject casingPrefab;
     public GameObject muzzleFlashPrefab;
     [SerializeField] private GameObject bulletPrefab;
 
-    public static GameObject impactEffect;
-    public static GameObject bulletHoleEffect;
+    [SerializeField] private GameObject impactStandartEffect;
 
-    public GameObject impactStandartEffect;
+    [SerializeField] private GameObject impactStoneEffect;
+    [SerializeField] private GameObject bulletHoleStoneEffect;
 
-    public GameObject impactStoneEffect;
-    public GameObject bulletHoleStoneEffect;
+    [SerializeField] private GameObject impactWoodEffect;
+    [SerializeField] private GameObject bulletHoleWoodEffect;
 
-    public GameObject impactWoodEffect;
-    public GameObject bulletHoleWoodEffect;
-
-    public GameObject impactMetalEffect;
-    public GameObject bulletHoleMetalEffect;
-
-    public GameObject FPCharacter;
+    [SerializeField] private GameObject impactMetalEffect;
+    [SerializeField] private GameObject bulletHoleMetalEffect;
 
     public AudioClip shotAudio;
     public AudioClip noBulletsAudio;
 
+    // Impact and hole effects represents by GameObject array. 0-impact, 1-hole
+    public GameObject[] CreateImpactAndHole(Collision collision)
+    {
+        // Set default impact and hole effects
+        GameObject impactEffect = impactStandartEffect;
+        GameObject bulletHoleEffect = null;
+        
+        // Check the object for wood, stone, metal to choose effect style
+        if (collision.transform.GetComponent<Renderer>() != null)
+        {
+            string materialName = MaterialCheck(collision.transform.GetComponent<Renderer>().material.name);
+            if (materialName == "stone")
+            {
+                impactEffect = impactStoneEffect;
+                bulletHoleEffect = bulletHoleStoneEffect;
+            } else if (materialName == "wood") {
+                impactEffect = impactWoodEffect;
+                bulletHoleEffect = bulletHoleWoodEffect;
+            } else if (materialName == "metal") {
+                impactEffect = impactMetalEffect;
+                bulletHoleEffect = bulletHoleMetalEffect;
+            }
+            if (collision.transform.tag == "chain")
+                bulletHoleEffect = null;
+        }
+        return new GameObject[] {impactEffect, bulletHoleEffect};
+    }
+
+    // Create Flash effect and Bullet force
     public void ShowShootingEffects(Transform point, float destroyTimer, float range, float shotPower)
     {
         // Shot sound effect
@@ -42,43 +64,12 @@ public class ShootEffects : MonoBehaviour
         // Destroy the muzzle flash effect
         Destroy(tempFlash, destroyTimer);
 
+        // Create bullet and make force
         GameObject bullet = Instantiate(bulletPrefab, point.position, point.rotation);
-        bullet.GetComponent<Rigidbody>().AddForce(point.forward * shotPower * 10);
+        bullet.GetComponent<Rigidbody>().AddForce(point.forward * shotPower);
 
-        // Inspect target element and create effects
-        /*RaycastHit hit;
-        Camera FPSCamera = FPCharacter.GetComponent<Camera>();
-        if (Physics.Raycast(FPSCamera.transform.position, FPSCamera.transform.forward, out hit, range))
-        {
-            // Set default impact and hole effects
-            impactEffect = impactStandartEffect;
-            bulletHoleEffect = null;
-            
-            // Check the object for wood, stone, metal to choose effect style
-            if (hit.transform.GetComponent<Renderer>() != null)
-            {
-                string materialName = MaterialCheck(hit.transform.GetComponent<Renderer>().material.name);
-                if (materialName == "stone")
-                {
-                    impactEffect = impactStoneEffect;
-                    bulletHoleEffect = bulletHoleStoneEffect;
-                } else if (materialName == "wood") {
-                    impactEffect = impactWoodEffect;
-                    bulletHoleEffect = bulletHoleWoodEffect;
-                } else if (materialName == "metal") {
-                    impactEffect = impactMetalEffect;
-                    bulletHoleEffect = bulletHoleMetalEffect;
-                }
-            }*/
-
-            // Iron chain destroy on hit with no impact and bullet hole effects
-            /*if (hit.transform.tag == "chain" && hit.transform.GetComponent<HingeJoint>() != null)
-            {
-                Destroy(hit.transform.GetComponent<HingeJoint>());
-                impactEffect = impactStandartEffect;
-                bulletHoleEffect = null;
-            }
-
+        
+            /*
             // Hit dummy target, check for "dummy" tag also parent object because bullet can hit the bullet hole
             if ((hit.transform.tag == "dummy" || hit.transform.parent?.tag == "dummy") 
                 && DummyGenerator.s_dummyWeapon == WeaponController.s_weapon)
@@ -88,27 +79,12 @@ public class ShootEffects : MonoBehaviour
                 hit.transform.gameObject.transform.GetComponent<Rigidbody>().mass = DummyGenerator.s_dummyMass;
                 hit.transform.tag = "Untagged";
                 DummyGenerator.s_dummy = false;
-            }*/
-
-            // Create an impact effect
-            /*GameObject impact = Instantiate(impactEffect, hit.point + hit.normal * 0.02f, Quaternion.LookRotation(hit.normal));
-            Destroy(impact, 1f);
-
-            // Create bullet hole effect (rotate to player and move step from object)
-            if (bulletHoleEffect != null)
-            {
-                GameObject bulletHole = Instantiate(bulletHoleEffect, hit.point + hit.normal * 0.0001f, Quaternion.LookRotation(-hit.normal));
-                bulletHole.transform.SetParent(hit.transform);
             }
 
-            // Add physics force to target
-            if (hit.rigidbody != null)
-            {
-                hit.rigidbody.AddForce(-hit.normal * shotPower);
-            }
         }*/
     }
 
+    // Create casing effect
     public void ShowCasingEffects(Transform point, float power)
     {
         //Create the casing

@@ -69,7 +69,7 @@ public class ShotgunShoot : ShootEffects
             Vector3 correction = new Vector3(Random.Range(-0.2f,0.2f), Random.Range(-0.2f,0.2f), Random.Range(-0.2f,0.2f));
 
             // Inspect target element and create effects
-            RaycastHit hit;
+            /*RaycastHit hit;
             Camera FPSCamera = FPCharacter.GetComponent<Camera>();
             if (Physics.Raycast(FPSCamera.transform.position + correction, FPSCamera.transform.forward, out hit, Shotgun.s_bulletRange))
             {
@@ -127,7 +127,7 @@ public class ShotgunShoot : ShootEffects
                 {
                     hit.rigidbody.AddForce(-hit.normal * Shotgun.s_shotPower);
                 }
-            }
+            }*/
         }
     }
 }

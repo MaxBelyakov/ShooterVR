@@ -19,8 +19,8 @@ public class Arrow : ShootEffects
             firstCollision = false;
 
             // Set default imapct and hole effects
-            impactEffect = impactStandartEffect;
-            bulletHoleEffect = null;
+            /*impactEffect = impactStandartEffect;
+            bulletHoleEffect = null;*/
 
             // Arrow behavior when hit in wood
             if (MaterialCheck(collision.transform.GetComponent<Renderer>().material.name) == "wood")
@@ -58,7 +58,7 @@ public class Arrow : ShootEffects
 
                 // Check the object for stone and metal to choose effect style
                 AudioClip impactAudio = impactAudioStandart;
-                if (MaterialCheck(collision.transform.GetComponent<Renderer>().material.name) == "stone")
+                /*if (MaterialCheck(collision.transform.GetComponent<Renderer>().material.name) == "stone")
                     impactEffect = impactStoneEffect;
 
                 if (MaterialCheck(collision.transform.GetComponent<Renderer>().material.name) == "metal")
@@ -75,7 +75,7 @@ public class Arrow : ShootEffects
                 Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
                 Vector3 pos = contact.point;
                 GameObject impact = Instantiate(impactEffect, pos, rot);
-                Destroy(impact, 1f);
+                Destroy(impact, 1f);*/
             }
 
             // Hit dummy target, check for "dummy" tag also parent object because bullet can hit the bullet hole

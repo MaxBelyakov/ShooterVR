@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907868e6d354d7e49b0932682f11e1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletsCurrent: 0
+  bulletsCurrent: 7
 --- !u!114 &5266764742211600201
 MonoBehaviour:
   m_ObjectHideFlags: 0

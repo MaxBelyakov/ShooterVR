@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿// All functions here is calling by Pistol Animation
+
+using UnityEngine;
 
 public class PistolShoot : ShootEffects
 {
-    [SerializeField] private Transform barrelLocation;
-    [SerializeField] private Transform casingExitLocation;
-    [SerializeField] private Transform magazineLocation;
+    [SerializeField] private Transform barrelLocation;              // Location of barrel
+    [SerializeField] private Transform casingExitLocation;          // Location of casing exit
+    [SerializeField] private Transform magazineLocation;            // Location of magazine
 
-    //This function creates the bullet behavior. Call by Animation
+    //This function creates the bullet behavior
     public void Shoot()
     {   
         // Minus bullet from counter
@@ -15,7 +17,7 @@ public class PistolShoot : ShootEffects
         ShowShootingEffects(barrelLocation, Pistol.s_flashDestroyTimer, Pistol.s_bulletRange, Pistol.s_shotPower);
     }
 
-    // This function creates a casing at the ejection slot. Call by Animation
+    // This function creates a casing at the ejection slot
     void CasingRelease()
     {
         ShowCasingEffects(casingExitLocation, Pistol.s_ejectPower);

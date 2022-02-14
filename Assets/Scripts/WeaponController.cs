@@ -112,7 +112,7 @@ public class Pistol : WeaponController
 {
     public static int s_bulletsAll = 7;             // All bullets in magazine
     public static int s_bulletsCurrent = 0;         // Current bullets in magazine
-    public static float s_ejectPower = 50f;        // Power of casing exit
+    public static float s_ejectPower = 50f;         // Power of casing exit
     public static float s_flashDestroyTimer = 2f;   // Shot flash destroy time
     public static float s_shotPower = 80f;          // Shot power
     public static float s_bulletRange = 100f;       // Bullet working distance
@@ -122,9 +122,9 @@ public class MachineGun : WeaponController
 {
     public static int s_bulletsAll = 50;            // All bullets in magazine
     public static int s_bulletsCurrent;             // Current bullets in magazine
-    public static float s_ejectPower = 50f;        // Power of casing exit
+    public static float s_ejectPower = 50f;         // Power of casing exit
     public static float s_flashDestroyTimer = 2f;   // Shot flash destroy time
-    public static float s_shotPower = 100f;          // Shot power
+    public static float s_shotPower = 100f;         // Shot power
     public static float s_bulletRange = 100f;       // Bullet working distance
 }
 
@@ -134,7 +134,7 @@ public class Shotgun : WeaponController
     public static int s_bulletsCurrent;             // Current bullets in magazine
     public static float s_ejectPower = 250f;        // Power of casing exit
     public static float s_flashDestroyTimer = 2f;   // Shot flash destroy time
-    public static float s_shotPower = 130f;          // Shot power
+    public static float s_shotPower = 130f;         // Shot power
     public static float s_bulletRange = 100f;       // Bullet working distance
     public static int s_buckshotBullets = 6;        // Buckshot bullets amount
 }
