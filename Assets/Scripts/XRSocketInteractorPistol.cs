@@ -3,7 +3,7 @@
 
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class XRSocketInteractorEdited : XRSocketInteractor
+public class XRSocketInteractorPistol : XRSocketInteractor
 {
     private string magazineTag = "pistol magazine ammo";
 

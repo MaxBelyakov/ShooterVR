@@ -35,7 +35,7 @@ public class PistolController : MonoBehaviour
     {
         // Update current amount bullets inside the pistol
         if (magazineLocation.childCount != 0)
-            Pistol.s_bulletsCurrent = magazineLocation.GetChild(0).transform.GetComponent<PistolMagazineController>().bulletsCurrent;
+            Pistol.s_bulletsCurrent = magazineLocation.GetChild(0).transform.GetComponent<MagazineController>().bulletsCurrent;
         else
             Pistol.s_bulletsCurrent = 0;
     }

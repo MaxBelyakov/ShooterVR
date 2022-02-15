@@ -1,33 +1,23 @@
-﻿using UnityEngine;
+﻿// All functions here is calling by Machine gun Animation
+
+using UnityEngine;
 
 public class MachineGunShoot : ShootEffects
 {
-    public Transform barrelLocation;
-    public Transform casingExitLocation;
+    [SerializeField] private Transform barrelLocation;              // Location of barrel
+    [SerializeField] private Transform casingExitLocation;          // Location of casing exit
+    [SerializeField] private Transform magazineLocation;            // Location of magazine
 
-    void Update()
-    {
-        if (Input.GetButton("Fire1") && !WeaponController.s_reloading)
-        {
-            WeaponController.s_shooting = true;
-
-            if (MachineGun.s_bulletsCurrent > 0)
-                this.GetComponent<Animator>().SetTrigger("Shoot");
-            else
-                this.GetComponent<Animator>().SetTrigger("NoBullets");
-        }
-    }
-
-    // Shoot behavior. Call by Animation
+    // Shoot behavior
     void Shoot()
     {
         // Minus bullet from counter
-        MachineGun.s_bulletsCurrent -= 1;
+        magazineLocation.GetChild(0).transform.GetComponent<MagazineController>().bulletsCurrent--;
 
         ShowShootingEffects(barrelLocation, MachineGun.s_flashDestroyTimer, MachineGun.s_bulletRange, MachineGun.s_shotPower);
     }
 
-    // This function creates a casing at the ejection slot. Call by Animation
+    // This function creates a casing at the ejection slot
     void CasingRelease()
     {
         ShowCasingEffects(casingExitLocation, MachineGun.s_ejectPower);

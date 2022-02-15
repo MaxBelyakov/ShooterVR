@@ -13,7 +13,6 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         // Add start up bullets to pistol, machine gun and shotgun
-        MachineGun.s_bulletsCurrent = MachineGun.s_bulletsAll;
         Shotgun.s_bulletsCurrent = Shotgun.s_bulletsAll;
     }
 
@@ -30,82 +29,7 @@ public class WeaponController : MonoBehaviour
             bulletsText.text = "Bullets: " + Shotgun.s_bulletsCurrent + " / " + Shotgun.s_bulletsAll;
         if (s_weapon == "Bow")
             bulletsText.text = "";
-    }/*
-        // Listen to change weapon input. Check for weapon in inventory, shooting and reloading flags
-        if (Input.GetButtonDown("1") && Inventory.s_pistolItem && !s_shooting && !s_reloading)
-        {
-            s_weapon = "Pistol";
-            machineGun.SetActive(false);
-            pistol.SetActive(true);
-            shotgun.SetActive(false);
-            bow.SetActive(false);
-        }
-        if (Input.GetButtonDown("2") && Inventory.s_machineGunItem && !s_shooting && !s_reloading)
-        {
-            s_weapon = "Machine Gun";
-            pistol.SetActive(false);
-            machineGun.SetActive(true);
-            shotgun.SetActive(false);
-            bow.SetActive(false);
-        }
-        if (Input.GetButtonDown("3") && Inventory.s_shotgunItem && !s_shooting && !s_reloading)
-        {
-            s_weapon = "Shotgun";
-            pistol.SetActive(false);
-            machineGun.SetActive(false);
-            shotgun.SetActive(true);
-            bow.SetActive(false);
-        }
-        if (Input.GetButtonDown("4") && Inventory.s_bowItem && !s_shooting && !s_reloading)
-        {
-            s_weapon = "Bow";
-            pistol.SetActive(false);
-            machineGun.SetActive(false);
-            shotgun.SetActive(false);
-            bow.SetActive(true);
-        }
-
-        // Listen for drop weapon input. Check for shooting and reloading flags
-        if (Input.GetButtonDown("Drop") && !s_shooting && !s_reloading)
-        {            
-            if (s_weapon == "Pistol")
-            {
-
-                // Remove item from inventory
-                Inventory.s_pistolItem = false;
-
-                // Select free hands
-                s_weapon = "noWeapon";
-                
-            }
-            if (s_weapon == "Machine Gun")
-            {
-
-                // Remove item from inventory
-                Inventory.s_machineGunItem = false;
-
-                // Select free hands
-                s_weapon = "noWeapon";
-            }
-            if (s_weapon == "Shotgun")
-            {
-
-                // Remove item from inventory
-                Inventory.s_shotgunItem = false;
-
-                // Select free hands
-                s_weapon = "noWeapon";
-            }
-            if (s_weapon == "Bow")
-            {
-
-                // Remove item from inventory
-                Inventory.s_bowItem = false;
-
-                // Select free hands
-                s_weapon = "noWeapon";
-            }
-        }*/
+    }
 }
 
 public class Pistol : WeaponController

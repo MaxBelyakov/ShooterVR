@@ -19,14 +19,14 @@ public class Inventory : MonoBehaviour
     private int shotgun_MagazineInventoryAll = 30;                      // Max value of shotgun bullets in inventory
     public static int s_shotgun_MagazineInventoryCurrent = 0;           // Current value of shotgun bullets in inventory
     public TMP_Text shotgun_MagazineInventoryText;                      // Text ammo status in inventory
-    private int shotgun_ammoPackValue = 10;                             // Value of bullets in 1 ammo pack
+    //private int shotgun_ammoPackValue = 10;                             // Value of bullets in 1 ammo pack
     public RawImage shotgun_ItemTexture;
     public TMP_Text shotgun_ItemText;
 
     private int bow_MagazineInventoryAll = 30;                          // Max value of arrows in inventory
     public static int s_bow_MagazineInventoryCurrent = 0;               // Current value of arrows in inventory
     public TMP_Text bow_MagazineInventoryText;                          // Text ammo status in inventory
-    private int bow_ammoPackValue = 10;                                 // Value of arrows in 1 ammo pack
+    //private int bow_ammoPackValue = 10;                                 // Value of arrows in 1 ammo pack
     public RawImage bow_ItemTexture;
     public TMP_Text bow_ItemText;
 

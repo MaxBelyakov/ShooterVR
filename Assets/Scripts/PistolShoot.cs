@@ -12,7 +12,7 @@ public class PistolShoot : ShootEffects
     public void Shoot()
     {   
         // Minus bullet from counter
-        magazineLocation.GetChild(0).transform.GetComponent<PistolMagazineController>().bulletsCurrent--;
+        magazineLocation.GetChild(0).transform.GetComponent<MagazineController>().bulletsCurrent--;
 
         ShowShootingEffects(barrelLocation, Pistol.s_flashDestroyTimer, Pistol.s_bulletRange, Pistol.s_shotPower);
     }
