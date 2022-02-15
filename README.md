@@ -19,3 +19,11 @@ v.1.1 - 1.1.1:
 - remove inspect target script (dont need in VR);
 - fix: on game start magazine is out of pistol
 - fix: debug error with unparrenting.
+
+v.1.2:
+- machine gun model;
+- machine gun magazine model;
+- grab machine gun;
+- socket magazine to machine gun;
+- machine gun shooting/no bullets;
+- edit socket script to get just machine gun ammo.
