@@ -27,3 +27,7 @@ v.1.2:
 - socket magazine to machine gun;
 - machine gun shooting/no bullets;
 - edit socket script to get just machine gun ammo.
+
+v.1.3:
+- machine gun can takes in two hands, second hand rotate the gun;
+- fix: machine gun ammo collide with weapon.
