@@ -78,8 +78,8 @@ GameObject:
   - component: {fileID: 4556216361898285185}
   - component: {fileID: 4458098510031462134}
   - component: {fileID: 2037154171322776256}
-  - component: {fileID: 7756633460709139427}
   - component: {fileID: 8249989695195386155}
+  - component: {fileID: 9032643792290925440}
   m_Layer: 11
   m_Name: M1911 Magazine_Silver_Full
   m_TagString: pistol magazine ammo
@@ -228,7 +228,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletsCurrent: 7
---- !u!114 &7756633460709139427
+--- !u!114 &8249989695195386155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2501653225316076012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ab752805f8fa2438322e2c0bdc3d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: f1e9fd8fc1910b04aaa446f252471c71, type: 3}
+--- !u!114 &9032643792290925440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,19 +356,6 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
---- !u!114 &8249989695195386155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2501653225316076012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3ab752805f8fa2438322e2c0bdc3d1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: f1e9fd8fc1910b04aaa446f252471c71, type: 3}
 --- !u!1 &2761961549932814509
 GameObject:
   m_ObjectHideFlags: 0

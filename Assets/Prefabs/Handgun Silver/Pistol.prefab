@@ -1278,7 +1278,7 @@ MonoBehaviour:
     m_Bits: 4294967294
   m_AttachTransform: {fileID: 8062623956049771762}
   m_KeepSelectedTargetValid: 1
-  m_StartingSelectedInteractable: {fileID: 7051752615907535093}
+  m_StartingSelectedInteractable: {fileID: 8584888938563420310}
   m_HoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -1376,9 +1376,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2501653225316076012, guid: 8898c7572084f444aba45d5d18977877, type: 3}
   m_PrefabInstance: {fileID: 754848462144768790}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7051752615907535093 stripped
+--- !u!114 &8584888938563420310 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7756633460709139427, guid: 8898c7572084f444aba45d5d18977877, type: 3}
+  m_CorrespondingSourceObject: {fileID: 9032643792290925440, guid: 8898c7572084f444aba45d5d18977877, type: 3}
   m_PrefabInstance: {fileID: 754848462144768790}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2940405219756819194}
