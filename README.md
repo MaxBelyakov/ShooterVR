@@ -31,3 +31,8 @@ v.1.2:
 v.1.3:
 - machine gun can takes in two hands, second hand rotate the gun;
 - fix: machine gun ammo collide with weapon.
+
+v.1.4:
+- add shotgun model;
+- shotgun shooting / no bullets;
+- shotgun take by two hands.
