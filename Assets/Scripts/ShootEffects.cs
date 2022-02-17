@@ -8,7 +8,7 @@ public class ShootEffects : MonoBehaviour
 {
     [SerializeField] private GameObject casingPrefab;
     public GameObject muzzleFlashPrefab;
-    [SerializeField] private GameObject bulletPrefab;
+    public GameObject bulletPrefab;
 
     [SerializeField] private GameObject impactStandartEffect;
 

@@ -12,7 +12,7 @@ public class WeaponController : MonoBehaviour
 
     void Start()
     {
-        // Add start up bullets to pistol, machine gun and shotgun
+        // Add start up bullets to shotgun
         Shotgun.s_bulletsCurrent = Shotgun.s_bulletsAll;
     }
 

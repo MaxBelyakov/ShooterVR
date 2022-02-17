@@ -2,25 +2,8 @@ using UnityEngine;
 
 public class ShotgunShoot : ShootEffects
 {
-    public Transform barrelLocation;
-    public Transform casingExitLocation;
-
-    void Update()
-    {
-        //If you want a different input, change it here
-        if (Input.GetButtonDown("Fire1") && !WeaponController.s_reloading)
-        {
-            WeaponController.s_shooting = true;
-            if (Shotgun.s_bulletsCurrent != 0)
-            {
-                //Calls animation on the gun that has the relevant animation events that will fire
-                this.GetComponent<Animator>().SetTrigger("Fire");
-            } else {
-                // No bullets animation
-                this.GetComponent<Animator>().SetTrigger("noBullets");
-            }
-        }
-    }
+    [SerializeField] private Transform barrelLocation;
+    [SerializeField] private Transform casingExitLocation;
 
     // This function creates the bullet behavior. Different of ShootEffect class. Call by Animation
     void Shoot()
@@ -68,66 +51,9 @@ public class ShotgunShoot : ShootEffects
             // Random buckshot correction
             Vector3 correction = new Vector3(Random.Range(-0.2f,0.2f), Random.Range(-0.2f,0.2f), Random.Range(-0.2f,0.2f));
 
-            // Inspect target element and create effects
-            /*RaycastHit hit;
-            Camera FPSCamera = FPCharacter.GetComponent<Camera>();
-            if (Physics.Raycast(FPSCamera.transform.position + correction, FPSCamera.transform.forward, out hit, Shotgun.s_bulletRange))
-            {
-                // Check the object for wood, stone, metal to choose effect style
-                GameObject impactEffect = impactStandartEffect;
-                GameObject bulletHoleEffect = null;
-                if (hit.transform.GetComponent<Renderer>() != null)
-                {
-                    string materialName = MaterialCheck(hit.transform.GetComponent<Renderer>().material.name);
-                    if (materialName == "stone")
-                    {
-                        impactEffect = impactStoneEffect;
-                        bulletHoleEffect = bulletHoleStoneEffect;
-                    } else if (materialName == "wood") {
-                        impactEffect = impactWoodEffect;
-                        bulletHoleEffect = bulletHoleWoodEffect;
-                    } else if (materialName == "metal") {
-                        impactEffect = impactMetalEffect;
-                        bulletHoleEffect = bulletHoleMetalEffect;
-                    }
-                }
-
-                // Iron chain destroy on hit with no impact and bullet hole effects
-                if (hit.transform.tag == "chain" && hit.transform.GetComponent<HingeJoint>() != null)
-                {
-                    Destroy(hit.transform.GetComponent<HingeJoint>());
-                    impactEffect = impactStandartEffect;
-                    bulletHoleEffect = null;
-                }
-
-                // Hit dummy target, check for "dummy" tag also parent object because bullet can hit the bullet hole
-                if ((hit.transform.tag == "dummy" || (hit.transform.parent?.tag == "dummy")) 
-                    && DummyGenerator.s_dummyWeapon == WeaponController.s_weapon)
-                {
-                    // Dummy weapon compares with current player weapon and start drop the dummy
-                    hit.transform.gameObject.AddComponent<Rigidbody>();
-                    hit.transform.gameObject.transform.GetComponent<Rigidbody>().mass = DummyGenerator.s_dummyMass;
-                    hit.transform.tag = "Untagged";
-                    DummyGenerator.s_dummy = false;
-                }
-
-                // Create an impact effect
-                GameObject impact = Instantiate(impactEffect, hit.point + hit.normal * 0.02f, Quaternion.LookRotation(hit.normal));
-                Destroy(impact, 1f);
-                
-                // Create bullet hole effect (rotate to player and move step from object)
-                if (bulletHoleEffect != null)
-                {
-                    GameObject bulletHole = Instantiate(bulletHoleEffect, hit.point + hit.normal * 0.0001f, Quaternion.LookRotation(-hit.normal));
-                    bulletHole.transform.SetParent(hit.transform);
-                }             
-
-                // Add physics force to target
-                if (hit.rigidbody != null)
-                {
-                    hit.rigidbody.AddForce(-hit.normal * Shotgun.s_shotPower);
-                }
-            }*/
+            // Create bullet and make force
+            GameObject bullet = Instantiate(bulletPrefab, barrelLocation.position + correction, barrelLocation.rotation);
+            bullet.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * Shotgun.s_shotPower);
         }
     }
 }
