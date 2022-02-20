@@ -111,6 +111,10 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8403992145370945202, guid: a737d62f4ff0b854a9d767507f039686, type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403992145370945202, guid: a737d62f4ff0b854a9d767507f039686, type: 3}
       propertyPath: m_CollisionDetection
       value: 2
       objectReference: {fileID: 0}

@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: bulletHoleStoneEffect
       value: 
       objectReference: {fileID: 8837256863699861268, guid: c21aa115606154149877d5abc459d8a8, type: 3}
+    - target: {fileID: 8403992145370945202, guid: 9e0ef2cf9cfc11c46bbe7f28b272f6fb, type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8535412081993147290, guid: 9e0ef2cf9cfc11c46bbe7f28b272f6fb, type: 3}
       propertyPath: m_RootOrder
       value: 0

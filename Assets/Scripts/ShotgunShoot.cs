@@ -7,10 +7,7 @@ public class ShotgunShoot : ShootEffects
 
     // This function creates the bullet behavior. Different of ShootEffect class. Call by Animation
     void Shoot()
-    {   
-        // Minus bullet from counter
-        Shotgun.s_bulletsCurrent --;
-
+    {
         // Shot sound effect
         this.GetComponent<AudioSource>().PlayOneShot(shotAudio);
 
