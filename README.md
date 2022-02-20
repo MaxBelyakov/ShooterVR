@@ -36,3 +36,10 @@ v.1.4:
 - add shotgun model;
 - shotgun shooting / no bullets;
 - shotgun take by two hands.
+
+v.1.5:
+- shotgun reloading (multi sockets for bullets);
+- empty casing ammo for shotgun;
+- add bow item;
+- add arrow item;
+- arrow hold in bow socket.
