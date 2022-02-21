@@ -10,10 +10,13 @@ public class BowStringMeasurer : XRBaseInteractable
     public Transform stringStart;
     public Transform stringEnd;
 
+    public float stringAmount = 0.0f;
+
     private IXRSelectInteractor stringInteractor;
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
+        print("select");
         base.OnSelectEntered(args);
 
         // Set interactor for measuring
@@ -22,13 +25,14 @@ public class BowStringMeasurer : XRBaseInteractable
 
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
+        print("exit");
         base.OnSelectExited(args);
 
         // Clear interactor and reset string amount for animation
         stringInteractor = null;
 
         // Reset everything
-
+        SetStringValues(stringStart.position, 0.0f);
     }
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
@@ -44,10 +48,7 @@ public class BowStringMeasurer : XRBaseInteractable
                 float newStringAmount = CalculateString(interactorPosition);
                 Vector3 newStringPosition = Vector3.Lerp(stringStart.position, stringEnd.position, newStringAmount);
 
-                if (newStringAmount != 0.0f)
-                {
-                    Pulled?.Invoke(newStringPosition, newStringAmount);
-                }
+                SetStringValues(newStringPosition, newStringAmount);
             }
         }
     }
@@ -67,5 +68,14 @@ public class BowStringMeasurer : XRBaseInteractable
 
         return stringValue;
     }
-    
+
+    private void SetStringValues(Vector3 newStringPosition, float newStringAmount)
+    {
+        // If it's a new value
+        if (newStringAmount != stringAmount)
+        {
+            stringAmount = newStringAmount;
+            Pulled?.Invoke(newStringPosition, newStringAmount);
+        }
+    }
 }

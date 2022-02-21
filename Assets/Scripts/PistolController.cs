@@ -72,7 +72,7 @@ public class PistolController : MonoBehaviour
     // Listener. Add magazine
     private void AddMagazine(SelectEnterEventArgs interactor)
     {
-        // FIX ME
+        // fix: Ignore grabbing weapon magazine when pistol not in the hands (more info in MagazineGrabInteractable)
         interactor.interactableObject.transform.gameObject.layer = 11;
 
         // Put the magazine to pistol magazine location
@@ -85,7 +85,7 @@ public class PistolController : MonoBehaviour
     // Listener. Remove magazine
     private void RemoveMagazine(SelectExitEventArgs interactor)
     {
-        // FIX ME
+        // fix: Ignore grabbing weapon magazine when pistol not in the hands (more info in MagazineGrabInteractable)
         interactor.interactableObject.transform.gameObject.layer = 0;
 
         if (!exitGame) // fix: debug error unparrenting pistol magazine when exit game

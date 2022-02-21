@@ -70,7 +70,7 @@ public class MachineGunController : MonoBehaviour
     // Listener. Add magazine
     private void AddMagazine(SelectEnterEventArgs interactor)
     {
-        // FIX ME
+        // fix: Ignore grabbing weapon magazine when weapon not in the hands (more info in MagazineGrabInteractable)
         interactor.interactableObject.transform.gameObject.layer = 11;
 
         // Put the magazine to weapon magazine location
@@ -83,7 +83,7 @@ public class MachineGunController : MonoBehaviour
     // Listener. Remove magazine
     private void RemoveMagazine(SelectExitEventArgs interactor)
     {
-        // FIX ME
+        // fix: Ignore grabbing weapon magazine when weapon not in the hands (more info in MagazineGrabInteractable)
         interactor.interactableObject.transform.gameObject.layer = 0;
 
         if (!exitGame) // fix: debug error unparrenting weapon magazine when exit game

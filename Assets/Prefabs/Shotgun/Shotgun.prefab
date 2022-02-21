@@ -561,8 +561,7 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
-  secondHandGrabPoints:
-  - {fileID: 7799947003135982499}
+  secondHandGrabPoint: {fileID: 7799947003135982499}
 --- !u!82 &7799947002748173718
 AudioSource:
   m_ObjectHideFlags: 0
