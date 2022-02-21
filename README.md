@@ -43,3 +43,7 @@ v.1.5:
 - add bow item;
 - add arrow item;
 - arrow hold in bow socket.
+
+v.1.6:
+- fix: can get pistol magazine when weapon out of hands;
+- fix: ignore second hand exit trigger when exit first hand.
