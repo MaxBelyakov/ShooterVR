@@ -47,3 +47,6 @@ v.1.5:
 v.1.6:
 - fix: can get pistol magazine when weapon out of hands;
 - fix: ignore second hand exit trigger when exit first hand.
+
+v.1.7:
+- bow string and inertia.
