@@ -66,7 +66,7 @@ public class Shotgun : WeaponController
 public class Bow : WeaponController
 {
     public static float stringSpeed = 130f;         // Speed of string stretch
-    public static float shootSpeed = 850f;          // Speed of string unstretch
+    public static float shootSpeed = 350f;          // Speed of string unstretch
     public static float heightLimit = -0.3f;        // Bow height limit when shooting
     public static float arrowMass = 0.03f;          // Arrow mass, affect to hit power
 }
