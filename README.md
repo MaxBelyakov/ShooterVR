@@ -50,3 +50,10 @@ v.1.6:
 
 v.1.7:
 - bow string and inertia.
+
+v.1.8:
+- bow shooting with arrow;
+- arrow effects (impact, sounds, stick in wood);
+- bow can reloaded just by arrow;
+- drop string and arrow when drop the bow;
+- get arrow from stick in wood objects.
