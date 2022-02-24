@@ -65,8 +65,10 @@ public class Shotgun : WeaponController
 
 public class Bow : WeaponController
 {
-    public static float stringSpeed = 130f;         // Speed of string stretch
     public static float shootSpeed = 350f;          // Speed of string unstretch
-    public static float heightLimit = -0.3f;        // Bow height limit when shooting
-    public static float arrowMass = 0.03f;          // Arrow mass, affect to hit power
+    public static float arrowSpeedStick = 8f;       // Arrow speed limit when start stick in objects or impact effect
+    public static float arrowDropSpeedLimit = 3f;   // Arrow drop speed limit when can play drop sound
+    public static float inertia = 1000f;            // String inertia divider
+    public static float forceReducing = 70f;        // Arrow move force reducing value
+    public static float depth = 0.3f;               // Depth that arrow move in target
 }
