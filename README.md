@@ -57,3 +57,8 @@ v.1.8:
 - bow can reloaded just by arrow;
 - drop string and arrow when drop the bow;
 - get arrow from stick in wood objects.
+
+v.1.9:
+- inventory belt;
+- inventory machine gun ammo put/get;
+- inventory pistol ammo put/get.
