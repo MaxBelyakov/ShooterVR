@@ -62,3 +62,10 @@ v.1.9:
 - inventory belt;
 - inventory machine gun ammo put/get;
 - inventory pistol ammo put/get.
+
+v.2.0:
+- change inventory logic - items collect to list instead destroying;
+- inventory shotgun bullets and box ammo;
+- inventory bow arrows and quivers;
+- inventory hover only selected ammo;
+- weapon hover only selected ammo.
