@@ -3,11 +3,13 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-public class XRInventoryMachineGun : XRSocketInteractor
+public class XRInventoryBow : XRSocketInteractor
 {
     public XRSimpleInteractable dragInteractable;                   // XRSimpleInteraction component of inventory (need to drag ammo)
 
-    private string magazineTag = "machine gun ammo";                // Ammo tag (need to put in socket just it)
+    public GameObject ammoPrefab;                                   // Ammo prefab
+    private string magazineTag = "arrow";                           // Ammo tag (need to put in socket just it)
+    private string boxTag = "bow ammo box";                         // Ammo box tag (box with bullets)
 
     private List<GameObject> inventory = new List<GameObject>();    // Inventory collection
 
@@ -50,7 +52,8 @@ public class XRInventoryMachineGun : XRSocketInteractor
     // Can put in inventory socket only current ammo type and limit by max socket size
     public override bool CanSelect(IXRSelectInteractable interactable)
     {
-        return base.CanSelect(interactable) && interactable.transform.CompareTag(magazineTag) && inventory.Count < MachineGun.s_ammoAll;
+        return base.CanSelect(interactable) && inventory.Count < Shotgun.s_ammoAll 
+        && (interactable.transform.CompareTag(magazineTag) || interactable.transform.CompareTag(boxTag));
     }
 
     // Put ammo inside inventory socket
@@ -59,10 +62,32 @@ public class XRInventoryMachineGun : XRSocketInteractor
         // Cancel interaction between hand (interactor) and ammo
         interactionManager.SelectExit(args.interactorObject, args.interactableObject);
 
-        // Put ammo in inventory
+        // Get ammo gameobject
         GameObject ammo = args.interactableObject.transform.gameObject;
-        inventory.Add(ammo);
-        ammo.SetActive(false);
+
+        // Ammo box or single ammo
+        if (ammo.tag == boxTag)
+        {
+            // Destroy box
+            Destroy(ammo);
+            
+            // Ammo box contain a collection of single bullets
+            for (int i = 1; i <= Bow.s_ammoBox; i++)
+            {
+                ammo = Instantiate(ammoPrefab, args.interactableObject.transform.position, args.interactableObject.transform.rotation);
+                inventory.Add(ammo);
+                ammo.SetActive(false);
+                
+                // Not more than weapon inventory max size
+                if (inventory.Count == Bow.s_ammoAll)
+                    break;
+            }
+        } else
+        {
+            // Put single ammo in inventory
+            inventory.Add(ammo);
+            ammo.SetActive(false);
+        }
 
         // Play sound effect
         GetComponent<AudioSource>().PlayOneShot(a_magazineTake);
@@ -81,12 +106,13 @@ public class XRInventoryMachineGun : XRSocketInteractor
                 component.enabled = false;
 
         // Update ammo status text
-        ammoText.text = inventory.Count + " / " + MachineGun.s_ammoAll;
+        ammoText.text = inventory.Count + " / " + Bow.s_ammoAll;
     }
 
     // Hover socket just for selected weapon ammo and in case free place in inventory
     public override bool CanHover(IXRHoverInteractable interactable)
     {
-        return base.CanHover(interactable) && interactable.transform.CompareTag(magazineTag) && inventory.Count < MachineGun.s_ammoAll;
+        return base.CanHover(interactable) && inventory.Count < Bow.s_ammoAll 
+        && (interactable.transform.CompareTag(magazineTag) || interactable.transform.CompareTag(boxTag));
     }
 }

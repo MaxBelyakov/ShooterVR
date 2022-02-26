@@ -11,4 +11,10 @@ public class XRSocketInteractorMachineGun : XRSocketInteractor
     {
         return base.CanSelect(interactable) && interactable.transform.CompareTag(magazineTag);
     }
+
+    // Hover socket just for selected weapon ammo
+    public override bool CanHover(IXRHoverInteractable interactable)
+    {
+        return base.CanHover(interactable) && interactable.transform.CompareTag(magazineTag);
+    }
 }

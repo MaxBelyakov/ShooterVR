@@ -3,11 +3,11 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-public class XRInventoryMachineGun : XRSocketInteractor
+public class XRInventoryPistol : XRSocketInteractor
 {
     public XRSimpleInteractable dragInteractable;                   // XRSimpleInteraction component of inventory (need to drag ammo)
 
-    private string magazineTag = "machine gun ammo";                // Ammo tag (need to put in socket just it)
+    private string magazineTag = "pistol magazine ammo";            // Ammo tag (need to put in socket just it)
 
     private List<GameObject> inventory = new List<GameObject>();    // Inventory collection
 
@@ -38,7 +38,7 @@ public class XRInventoryMachineGun : XRSocketInteractor
             GameObject ammo = inventory[inventory.Count - 1];
             ammo.SetActive(true);
             inventory.Remove(ammo);
-            
+
             // Put ammo in hand (interactor)
             interactionManager.SelectEnter(args.interactorObject, ammo.GetComponent<IXRSelectInteractable>());
 
@@ -50,7 +50,7 @@ public class XRInventoryMachineGun : XRSocketInteractor
     // Can put in inventory socket only current ammo type and limit by max socket size
     public override bool CanSelect(IXRSelectInteractable interactable)
     {
-        return base.CanSelect(interactable) && interactable.transform.CompareTag(magazineTag) && inventory.Count < MachineGun.s_ammoAll;
+        return base.CanSelect(interactable) && interactable.transform.CompareTag(magazineTag) && inventory.Count < Pistol.s_ammoAll;
     }
 
     // Put ammo inside inventory socket
@@ -81,12 +81,12 @@ public class XRInventoryMachineGun : XRSocketInteractor
                 component.enabled = false;
 
         // Update ammo status text
-        ammoText.text = inventory.Count + " / " + MachineGun.s_ammoAll;
+        ammoText.text = inventory.Count + " / " + Pistol.s_ammoAll;
     }
 
     // Hover socket just for selected weapon ammo and in case free place in inventory
     public override bool CanHover(IXRHoverInteractable interactable)
     {
-        return base.CanHover(interactable) && interactable.transform.CompareTag(magazineTag) && inventory.Count < MachineGun.s_ammoAll;
+        return base.CanHover(interactable) && interactable.transform.CompareTag(magazineTag) && inventory.Count < Pistol.s_ammoAll;
     }
 }

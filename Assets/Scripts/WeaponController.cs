@@ -34,6 +34,7 @@ public class WeaponController : MonoBehaviour
 
 public class Pistol : WeaponController
 {
+    public static int s_ammoAll = 3;                // Max ammo inventory size
     public static int s_bulletsAll = 7;             // All bullets in magazine
     public static int s_bulletsCurrent = 0;         // Current bullets in magazine
     public static float s_ejectPower = 50f;         // Power of casing exit
@@ -44,6 +45,7 @@ public class Pistol : WeaponController
 
 public class MachineGun : WeaponController
 {
+    public static int s_ammoAll = 3;                // Max ammo inventory size
     public static int s_bulletsAll = 50;            // All bullets in magazine
     public static int s_bulletsCurrent;             // Current bullets in magazine
     public static float s_ejectPower = 50f;         // Power of casing exit
@@ -54,6 +56,8 @@ public class MachineGun : WeaponController
 
 public class Shotgun : WeaponController
 {
+    public static int s_ammoAll = 30;               // Max ammo inventory size
+    public static int s_ammoBox = 10;               // Amount of bullets in box ammo
     public static int s_bulletsAll = 2;             // All bullets in magazine
     public static int s_bulletsCurrent;             // Current bullets in magazine
     public static float s_ejectPower = 250f;        // Power of casing exit
@@ -65,6 +69,8 @@ public class Shotgun : WeaponController
 
 public class Bow : WeaponController
 {
+    public static int s_ammoAll = 30;               // Max arrows inventory size
+    public static int s_ammoBox = 10;               // Amount of arrows in quiver
     public static float shootSpeed = 350f;          // Speed of string unstretch
     public static float arrowSpeedStick = 8f;       // Arrow speed limit when start stick in objects or impact effect
     public static float arrowDropSpeedLimit = 3f;   // Arrow drop speed limit when can play drop sound

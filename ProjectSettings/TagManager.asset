@@ -16,6 +16,8 @@ TagManager:
   - pistol item
   - chain
   - dummy
+  - shotgun ammo box
+  - bow ammo box
   layers:
   - Default
   - TransparentFX
