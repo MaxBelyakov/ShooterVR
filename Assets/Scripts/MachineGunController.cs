@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using System.Collections;
 
 public class MachineGunController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class MachineGunController : MonoBehaviour
     [SerializeField] private AudioClip reloadAudio;                    // Reload sound
 
     private bool exitGame = false;                                     // fix: debug error unparrenting weapon magazine when exit game
+    private bool autoShooting = false;                                 // Flag start/stop auto shooting
 
     void Start()
     {
@@ -22,6 +24,7 @@ public class MachineGunController : MonoBehaviour
         weaponGrab.selectEntered.AddListener(GetWeapon);
         weaponGrab.selectExited.AddListener(DropWeapon);
         weaponGrab.activated.AddListener(StartShooting);
+        weaponGrab.deactivated.AddListener(StopShooting);
 
         // Add listeners to weapon magazine socket
         weaponSocket.selectEntered.AddListener(AddMagazine);
@@ -43,16 +46,39 @@ public class MachineGunController : MonoBehaviour
     // Listener. Shooting
     public void StartShooting(ActivateEventArgs interactor)
     {
-        if (!WeaponController.s_reloading && !WeaponController.s_shooting)
+        // Activate autoshooting by default
+        autoShooting = true;
+        StartCoroutine(AutoShooting());
+    }
+
+    // Shooting repeater while autoshooting flag is true
+    private IEnumerator AutoShooting()
+    {
+        if (autoShooting)
         {
-            WeaponController.s_shooting = true;
-            if (MachineGun.s_bulletsCurrent > 0)
-                // Calls animation on the gun that has the relevant animation events that will fire
-                weaponModel.GetComponent<Animator>().SetTrigger("Shoot");
-            else
-                // No bullets animation
-                weaponModel.GetComponent<Animator>().SetTrigger("NoBullets");
+            if (!WeaponController.s_reloading && !WeaponController.s_shooting)
+            {
+                WeaponController.s_shooting = true;
+                if (MachineGun.s_bulletsCurrent > 0)
+                    // Calls animation on the gun that has the relevant animation events that will fire
+                    weaponModel.GetComponent<Animator>().SetTrigger("Shoot");
+                else
+                    // No bullets animation
+                    weaponModel.GetComponent<Animator>().SetTrigger("NoBullets");
+            }
+            yield return new WaitForSeconds (0.05f);
+
+            // Repeat shooting
+            StartCoroutine(AutoShooting());
         }
+    }
+
+    // Listener. Stop shooting
+    public void StopShooting(DeactivateEventArgs interactor)
+    {
+        // Deactivate autoshooting
+        autoShooting = false;
+        StopCoroutine(AutoShooting());
     }
 
     // Listener. Drop weapon

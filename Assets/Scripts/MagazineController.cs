@@ -9,7 +9,7 @@ public class MagazineController : MonoBehaviour
 
     void Start()
     {
-        if (gameObject.tag == "pistol magazin ammo")
+        if (gameObject.tag == "pistol magazine ammo")
             bulletsCurrent = Pistol.s_bulletsAll;
         else if (gameObject.tag == "machine gun ammo")
             bulletsCurrent = MachineGun.s_bulletsAll;
@@ -18,7 +18,7 @@ public class MagazineController : MonoBehaviour
     void Update()
     {
         // Pistol empty magazine has no bullets inside
-        if (gameObject.tag == "pistol magazin ammo" && bulletsCurrent <= 0)
+        if (gameObject.tag == "pistol magazine ammo" && bulletsCurrent <= 0)
             foreach (Transform child in transform.GetChild(0).transform)
                 Destroy(child.gameObject);
     }
