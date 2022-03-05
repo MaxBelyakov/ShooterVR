@@ -14,7 +14,7 @@ public class MachineGunShoot : ShootEffects
         // Minus bullet from counter
         magazineLocation.GetChild(0).transform.GetComponent<MagazineController>().bulletsCurrent--;
 
-        ShowShootingEffects(barrelLocation, MachineGun.s_flashDestroyTimer, MachineGun.s_bulletRange, MachineGun.s_shotPower);
+        ShowShootingEffects(barrelLocation, MachineGun.s_flashDestroyTimer, MachineGun.s_bulletRange, MachineGun.s_shotPower, MachineGun.s_tag);
     }
 
     // This function creates a casing at the ejection slot

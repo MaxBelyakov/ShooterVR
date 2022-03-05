@@ -34,47 +34,50 @@ public class WeaponController : MonoBehaviour
 
 public class Pistol : WeaponController
 {
-    public static int s_ammoAll = 3;                // Max ammo inventory size
-    public static int s_bulletsAll = 7;             // All bullets in magazine
-    public static int s_bulletsCurrent = 0;         // Current bullets in magazine
-    public static float s_ejectPower = 50f;         // Power of casing exit
-    public static float s_flashDestroyTimer = 2f;   // Shot flash destroy time
-    public static float s_shotPower = 80f;          // Shot power
-    public static float s_bulletRange = 100f;       // Bullet working distance
+    public static int s_ammoAll = 3;                        // Max ammo inventory size
+    public static int s_bulletsAll = 7;                     // All bullets in magazine
+    public static int s_bulletsCurrent = 0;                 // Current bullets in magazine
+    public static float s_ejectPower = 50f;                 // Power of casing exit
+    public static float s_flashDestroyTimer = 2f;           // Shot flash destroy time
+    public static float s_shotPower = 80f;                  // Shot power
+    public static float s_bulletRange = 100f;               // Bullet working distance
+    public static string s_tag = "pistol bullet";           // Tag for new bullet (using in dummy game)
 }
 
 public class MachineGun : WeaponController
 {
-    public static int s_ammoAll = 3;                // Max ammo inventory size
-    public static int s_bulletsAll = 50;            // All bullets in magazine
-    public static int s_bulletsCurrent;             // Current bullets in magazine
-    public static float s_ejectPower = 50f;         // Power of casing exit
-    public static float s_flashDestroyTimer = 2f;   // Shot flash destroy time
-    public static float s_shotPower = 100f;         // Shot power
-    public static float s_bulletRange = 100f;       // Bullet working distance
+    public static int s_ammoAll = 3;                        // Max ammo inventory size
+    public static int s_bulletsAll = 50;                    // All bullets in magazine
+    public static int s_bulletsCurrent;                     // Current bullets in magazine
+    public static float s_ejectPower = 50f;                 // Power of casing exit
+    public static float s_flashDestroyTimer = 2f;           // Shot flash destroy time
+    public static float s_shotPower = 100f;                 // Shot power
+    public static float s_bulletRange = 100f;               // Bullet working distance
+    public static string s_tag = "machine gun bullet";      // Tag for new bullet (using in dummy game)
 }
 
 public class Shotgun : WeaponController
 {
-    public static int s_ammoAll = 30;               // Max ammo inventory size
-    public static int s_ammoBox = 10;               // Amount of bullets in box ammo
-    public static int s_bulletsAll = 2;             // All bullets in magazine
-    public static int s_bulletsCurrent;             // Current bullets in magazine
-    public static float s_ejectPower = 250f;        // Power of casing exit
-    public static float s_flashDestroyTimer = 2f;   // Shot flash destroy time
-    public static float s_shotPower = 130f;         // Shot power
-    public static float s_bulletRange = 100f;       // Bullet working distance
-    public static int s_buckshotBullets = 6;        // Buckshot bullets amount
+    public static int s_ammoAll = 30;                       // Max ammo inventory size
+    public static int s_ammoBox = 10;                       // Amount of bullets in box ammo
+    public static int s_bulletsAll = 2;                     // All bullets in magazine
+    public static int s_bulletsCurrent;                     // Current bullets in magazine
+    public static float s_ejectPower = 250f;                // Power of casing exit
+    public static float s_flashDestroyTimer = 2f;           // Shot flash destroy time
+    public static float s_shotPower = 130f;                 // Shot power
+    public static float s_bulletRange = 100f;               // Bullet working distance
+    public static int s_buckshotBullets = 6;                // Buckshot bullets amount
+    public static string s_tag = "shotgun bullet";          // Tag for new bullet (using in dummy game)
 }
 
 public class Bow : WeaponController
 {
-    public static int s_ammoAll = 30;               // Max arrows inventory size
-    public static int s_ammoBox = 10;               // Amount of arrows in quiver
-    public static float shootSpeed = 350f;          // Speed of string unstretch
-    public static float arrowSpeedStick = 8f;       // Arrow speed limit when start stick in objects or impact effect
-    public static float arrowDropSpeedLimit = 3f;   // Arrow drop speed limit when can play drop sound
-    public static float inertia = 1000f;            // String inertia divider
-    public static float forceReducing = 70f;        // Arrow move force reducing value
-    public static float depth = 0.3f;               // Depth that arrow move in target
+    public static int s_ammoAll = 30;                       // Max arrows inventory size
+    public static int s_ammoBox = 10;                       // Amount of arrows in quiver
+    public static float shootSpeed = 350f;                  // Speed of string unstretch
+    public static float arrowSpeedStick = 8f;               // Arrow speed limit when start stick in objects or impact effect
+    public static float arrowDropSpeedLimit = 3f;           // Arrow drop speed limit when can play drop sound
+    public static float inertia = 1000f;                    // String inertia divider
+    public static float forceReducing = 70f;                // Arrow move force reducing value
+    public static float depth = 0.3f;                       // Depth that arrow move in target
 }

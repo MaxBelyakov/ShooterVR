@@ -51,6 +51,7 @@ public class ShotgunShoot : ShootEffects
             // Create bullet and make force
             GameObject bullet = Instantiate(bulletPrefab, barrelLocation.position + correction, barrelLocation.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(barrelLocation.forward * Shotgun.s_shotPower);
+            bullet.transform.tag = Shotgun.s_tag;
         }
     }
 }

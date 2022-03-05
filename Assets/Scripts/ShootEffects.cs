@@ -53,7 +53,7 @@ public class ShootEffects : MonoBehaviour
     }
 
     // Create Flash effect and Bullet force
-    public void ShowShootingEffects(Transform point, float destroyTimer, float range, float shotPower)
+    public void ShowShootingEffects(Transform point, float destroyTimer, float range, float shotPower, string weapon_tag)
     {
         // Shot sound effect
         this.GetComponent<AudioSource>().PlayOneShot(shotAudio);
@@ -67,21 +67,7 @@ public class ShootEffects : MonoBehaviour
         // Create bullet and make force
         GameObject bullet = Instantiate(bulletPrefab, point.position, point.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(point.forward * shotPower);
-
-        
-            /*
-            // Hit dummy target, check for "dummy" tag also parent object because bullet can hit the bullet hole
-            if ((hit.transform.tag == "dummy" || hit.transform.parent?.tag == "dummy") 
-                && DummyGenerator.s_dummyWeapon == WeaponController.s_weapon)
-            {
-                // Dummy weapon compares with current player weapon and start drop the dummy
-                hit.transform.gameObject.AddComponent<Rigidbody>();
-                hit.transform.gameObject.transform.GetComponent<Rigidbody>().mass = DummyGenerator.s_dummyMass;
-                hit.transform.tag = "Untagged";
-                DummyGenerator.s_dummy = false;
-            }
-
-        }*/
+        bullet.transform.tag = weapon_tag;
     }
 
     // Create casing effect

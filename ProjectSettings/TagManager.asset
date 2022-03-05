@@ -18,6 +18,9 @@ TagManager:
   - dummy
   - shotgun ammo box
   - bow ammo box
+  - pistol bullet
+  - machine gun bullet
+  - shotgun bullet
   layers:
   - Default
   - TransparentFX
@@ -31,7 +34,7 @@ TagManager:
   - 
   - Weapon
   - Weapon Magazine
-  - 
+  - Teleportation Area
   - 
   - 
   - 
