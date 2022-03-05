@@ -77,3 +77,8 @@ v.2.1:
 - locomotion manager (show teleportation ray only when primary button is pressed);
 - military target game repair scripts;
 - chain target correct physics.
+
+v.2.1.1:
+- machine gun automatic shooting;
+- hands drop the objects if grab button not pressed, exclude weapons (in that case hands in sticky mode);
+- fix: pistol magazine not empty with no bullets.
