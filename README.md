@@ -69,3 +69,11 @@ v.2.0:
 - inventory bow arrows and quivers;
 - inventory hover only selected ammo;
 - weapon hover only selected ammo.
+
+v.2.1:
+- Oculus plugins;
+- Oculus full integration and settings;
+- teleporting ray;
+- locomotion manager (show teleportation ray only when primary button is pressed);
+- military target game repair scripts;
+- chain target correct physics.
