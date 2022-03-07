@@ -82,3 +82,12 @@ v.2.1.1:
 - machine gun automatic shooting;
 - hands drop the objects if grab button not pressed, exclude weapons (in that case hands in sticky mode);
 - fix: pistol magazine not empty with no bullets.
+
+v.2.2:
+- weapon in each hand shooting;
+- hands can move objects;
+- ignore teleportation layer all game objects;
+- teleportation inside tube;
+- fix: inventory position and rotation, item bugs;
+- fix: machine gun continious shooting when dropped;
+- fix: weapon can grab ammo from inventory.
