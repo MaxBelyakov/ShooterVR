@@ -70,7 +70,7 @@ public class BowStringGrabInteractable : XRGrabInteractable
         {
             // Inertia finished, shooting process is finished
             stringInertia = false;
-            WeaponController.s_shooting = false;
+            Bow.s_shooting = false;
         }
     }
 
@@ -118,7 +118,7 @@ public class BowStringGrabInteractable : XRGrabInteractable
             Transform arrow = interactable.transform;
 
             // Start shooting flag (before arrow release to avoid socketing again)
-            WeaponController.s_shooting = true;
+            Bow.s_shooting = true;
 
             // Release arrow
             interactionManager.SelectExit(interactable.interactorsSelecting[0], interactable);

@@ -32,27 +32,23 @@ public class ShotgunController : MonoBehaviour
     // Listener. Shooting
     public void StartShooting(ActivateEventArgs interactor)
     {
-        if (!WeaponController.s_reloading && !WeaponController.s_shooting)
+        if (Shotgun.s_bulletsCurrent > 0)
         {
-            WeaponController.s_shooting = true;
-            if (Shotgun.s_bulletsCurrent > 0)
+            // Destroy call remove magazine, minus bullet
+            foreach (var socket in weaponSockets)
             {
-                // Destroy call remove magazine, minus bullet
-                foreach (var socket in weaponSockets)
+                if (socket.hasSelection)
                 {
-                    if (socket.hasSelection)
-                    {
-                        Destroy(socket.interactablesSelected[0].transform.gameObject);
-                        break;
-                    }
+                    Destroy(socket.interactablesSelected[0].transform.gameObject);
+                    break;
                 }
-                // Calls animation on the gun that has the relevant animation events that will fire
-                weaponModel.GetComponent<Animator>().SetTrigger("Fire");
             }
-            else
-                // No bullets animation
-                weaponModel.GetComponent<Animator>().SetTrigger("noBullets");
+            // Calls animation on the gun that has the relevant animation events that will fire
+            weaponModel.GetComponent<Animator>().SetTrigger("Fire");
         }
+        else
+            // No bullets animation
+            weaponModel.GetComponent<Animator>().SetTrigger("noBullets");
     }
 
     // Listener. Drop weapon

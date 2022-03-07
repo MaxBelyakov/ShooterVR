@@ -65,18 +65,6 @@ public class Arrow : ShootEffects
                 GameObject impact = Instantiate(effects[0], pos, rot);
                 Destroy(impact, 1f);
             }
-
-            // Hit dummy target, check for "dummy" tag also parent object because bullet can hit the bullet hole
-            /*if ((collision.transform.tag == "dummy" || collision.transform.parent?.tag == "dummy") 
-                && DummyGenerator.s_dummyWeapon == WeaponController.s_weapon)
-            {
-                // Dummy weapon compares with current player weapon and start drop the dummy
-                collision.transform.gameObject.AddComponent<Rigidbody>();
-                collision.transform.gameObject.transform.GetComponent<Rigidbody>().mass = DummyGenerator.s_dummyMass;
-                collision.transform.tag = "Untagged";
-                DummyGenerator.s_dummy = false;
-            }*/
-
         } else if (!firstCollision && collision.gameObject.layer != 6)
         {
             // Check collision speed if moving fast play sound and ignore player collision

@@ -9,13 +9,13 @@ public class XRSocketInteractorBow : XRSocketInteractor
     public override bool CanSelect(IXRSelectInteractable interactable)
     {
         // s_shooting flag disable socket for arrow release
-        return base.CanSelect(interactable) && !WeaponController.s_shooting && interactable.transform.CompareTag(arrowTag);
+        return base.CanSelect(interactable) && !Bow.s_shooting && interactable.transform.CompareTag(arrowTag);
     }
 
     // Hover socket just for selected weapon ammo
     public override bool CanHover(IXRHoverInteractable interactable)
     {
         // s_shooting flag disable socket for arrow release
-        return base.CanHover(interactable) && !WeaponController.s_shooting && interactable.transform.CompareTag(arrowTag);
+        return base.CanHover(interactable) && !Bow.s_shooting && interactable.transform.CompareTag(arrowTag);
     }
 }

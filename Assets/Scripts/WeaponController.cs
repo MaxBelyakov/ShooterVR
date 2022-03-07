@@ -5,9 +5,6 @@ public class WeaponController : MonoBehaviour
 {
     public TMP_Text bulletsText;                        // Text show current value of bullets
 
-    public static bool s_shooting = false;              // Global flag, show weapon is shooting now
-    public static bool s_reloading = false;             // Global flag, show weapon is reloading now
-
     public static string s_weapon = "noWeapon";         // Name of weapon in hands at the current time
 
     void Start()
@@ -80,4 +77,5 @@ public class Bow : WeaponController
     public static float inertia = 1000f;                    // String inertia divider
     public static float forceReducing = 70f;                // Arrow move force reducing value
     public static float depth = 0.3f;                       // Depth that arrow move in target
+    public static bool s_shooting = false;                  // Global flag, show bow is shooting now
 }

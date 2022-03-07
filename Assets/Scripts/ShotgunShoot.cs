@@ -25,18 +25,12 @@ public class ShotgunShoot : ShootEffects
     void CasingRelease()
     {
         ShowCasingEffects(casingExitLocation, Shotgun.s_ejectPower);
-
-        // Finish shooting
-        WeaponController.s_shooting = false;
     }
 
     void NoBulletsSounds()
     {
         // Shot sound effect
         this.GetComponent<AudioSource>().PlayOneShot(noBulletsAudio);
-
-        // Finish shooting
-        WeaponController.s_shooting = false;
     }
 
     // Generate random shotgun bullet points and creates impacts and holes

@@ -21,16 +21,10 @@ public class MachineGunShoot : ShootEffects
     void CasingRelease()
     {
         ShowCasingEffects(casingExitLocation, MachineGun.s_ejectPower);
-        
-        // Finish shooting
-        WeaponController.s_shooting = false;
     }
 
     void MachineGunNoBullets()
     {
         this.GetComponent<AudioSource>().PlayOneShot(noBulletsAudio);
-        
-        // Finish shooting
-        WeaponController.s_shooting = false;
     }
 }

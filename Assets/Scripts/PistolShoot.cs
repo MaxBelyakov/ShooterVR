@@ -21,17 +21,11 @@ public class PistolShoot : ShootEffects
     void CasingRelease()
     {
         ShowCasingEffects(casingExitLocation, Pistol.s_ejectPower);
-
-        // Finish shooting
-        WeaponController.s_shooting = false;
     }
 
     void NoBulletsSounds()
     {
         // Shot sound effect
         GetComponent<AudioSource>().PlayOneShot(noBulletsAudio);
-
-        // Finish shooting
-        WeaponController.s_shooting = false;
     }
 }

@@ -56,16 +56,12 @@ public class MachineGunController : MonoBehaviour
     {
         if (autoShooting)
         {
-            if (!WeaponController.s_reloading && !WeaponController.s_shooting)
-            {
-                WeaponController.s_shooting = true;
-                if (MachineGun.s_bulletsCurrent > 0)
-                    // Calls animation on the gun that has the relevant animation events that will fire
-                    weaponModel.GetComponent<Animator>().SetTrigger("Shoot");
-                else
-                    // No bullets animation
-                    weaponModel.GetComponent<Animator>().SetTrigger("NoBullets");
-            }
+            if (MachineGun.s_bulletsCurrent > 0)
+                // Calls animation on the gun that has the relevant animation events that will fire
+                weaponModel.GetComponent<Animator>().SetTrigger("Shoot");
+            else
+                // No bullets animation
+                weaponModel.GetComponent<Animator>().SetTrigger("NoBullets");
             yield return new WaitForSeconds (0.05f);
 
             // Repeat shooting
@@ -85,6 +81,10 @@ public class MachineGunController : MonoBehaviour
     private void DropWeapon(SelectExitEventArgs interactor)
     {
         WeaponController.s_weapon = "noWeapon";
+        
+        // Deactivate autoshooting
+        autoShooting = false;
+        StopCoroutine(AutoShooting());
     }
 
     // Listener. Get weapon

@@ -43,18 +43,12 @@ public class PistolController : MonoBehaviour
     // Listener. Shooting
     public void StartShooting(ActivateEventArgs interactor)
     {
-        if (!WeaponController.s_reloading && !WeaponController.s_shooting)
-        {
-            WeaponController.s_shooting = true;
-            if (Pistol.s_bulletsCurrent != 0)
-            {
-                //Calls animation on the gun that has the relevant animation events that will fire
-                pistolModel.GetComponent<Animator>().SetTrigger("Fire");
-            } else {
-                // No bullets animation
-                pistolModel.GetComponent<Animator>().SetTrigger("noBullets");
-            }
-        }
+        if (Pistol.s_bulletsCurrent != 0)
+            //Calls animation on the gun that has the relevant animation events that will fire
+            pistolModel.GetComponent<Animator>().SetTrigger("Fire");
+        else
+            // No bullets animation
+            pistolModel.GetComponent<Animator>().SetTrigger("noBullets");
     }
 
     // Listener. Drop pistol
