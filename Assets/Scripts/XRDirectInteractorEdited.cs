@@ -9,6 +9,7 @@ public class XRDirectInteractorEdited : XRDirectInteractor
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
+        // Deactivate hand collider to avoid conflict with weapon colliders
         handCollider.enabled = false;
 
         // Only for weapons
@@ -25,6 +26,7 @@ public class XRDirectInteractorEdited : XRDirectInteractor
 
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
+        // Return hand collider
         handCollider.enabled = true;
 
         // Return to default action trigger
