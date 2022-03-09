@@ -91,3 +91,8 @@ v.2.2:
 - fix: inventory position and rotation, item bugs;
 - fix: machine gun continious shooting when dropped;
 - fix: weapon can grab ammo from inventory.
+
+v.2.3:
+- UI canvas (show ammo and bullets amount);
+- hands rebuid to avoid extra power when interact with big objects;
+- fix: pistol and machine gun magazine move with weapon when recoil.
