@@ -96,3 +96,13 @@ v.2.3:
 - UI canvas (show ammo and bullets amount);
 - hands rebuid to avoid extra power when interact with big objects;
 - fix: pistol and machine gun magazine move with weapon when recoil.
+
+v.2.4 (release):
+- add weapons and ammo to level;
+- grab cola, fork and spoon;
+- fix: gap between floor and dropped objects;
+- fix: objects size;
+- fix: objects mass;
+- fix: shotgun bullet socket position;
+- fix: pistol attach point position;
+- fix: bow move through walls and objects.
