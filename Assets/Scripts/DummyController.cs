@@ -8,9 +8,9 @@ public class DummyController : DummyGenerator
     void OnCollisionEnter(Collision collision)
     {
         // Dummy weapon compares with current player weapon and start drop the dummy
-        if ((collision.transform.tag == Shotgun.s_tag && s_dummyWeapon == "Shotgun")
-        || (collision.transform.tag == MachineGun.s_tag && s_dummyWeapon == "Machine Gun")
-        || (collision.transform.tag == Pistol.s_tag && s_dummyWeapon == "Pistol")
+        if ((collision.transform.tag == "shotgun bullet" && s_dummyWeapon == "Shotgun")
+        || (collision.transform.tag == "machine gun bullet" && s_dummyWeapon == "Machine Gun")
+        || (collision.transform.tag == "pistol bullet" && s_dummyWeapon == "Pistol")
         || (collision.transform.tag == "arrow" && s_dummyWeapon == "Bow"))
             DropDummy();
     }

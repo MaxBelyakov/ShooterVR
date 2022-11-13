@@ -4,9 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - pistol magazine ammo
   - pistol casing
-  - machine gun ammo
   - shotgun ammo
   - bow ammo
   - arrow

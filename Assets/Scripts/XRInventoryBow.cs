@@ -52,7 +52,8 @@ public class XRInventoryBow : XRSocketInteractor
     // Can put in inventory socket only current ammo type and limit by max socket size
     public override bool CanSelect(IXRSelectInteractable interactable)
     {
-        return base.CanSelect(interactable) && inventory.Count < Shotgun.s_ammoAll 
+        // && inventory.Count < Shotgun.s_ammoAll 
+        return base.CanSelect(interactable)
         && (interactable.transform.CompareTag(magazineTag) || interactable.transform.CompareTag(boxTag));
     }
 

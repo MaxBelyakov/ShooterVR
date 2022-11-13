@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Arrow : ShootEffects
+public class Arrow : MonoBehaviour
 {
     public bool firstCollision = true;                 // Flag that signal about first arrow collision
 
@@ -18,7 +18,7 @@ public class Arrow : ShootEffects
             firstCollision = false;
 
             // Arrow behavior when hit in wood
-            if (MaterialCheck(collision.transform.GetComponent<Renderer>().material.name) == "wood")
+            /*if (MaterialCheck(collision.transform.GetComponent<Renderer>().material.name) == "wood")
             {
                 // Stop the arrow
                 transform.GetComponent<Rigidbody>().isKinematic = true;
@@ -64,7 +64,7 @@ public class Arrow : ShootEffects
                 Vector3 pos = contact.point;
                 GameObject impact = Instantiate(effects[0], pos, rot);
                 Destroy(impact, 1f);
-            }
+            }*/
         } else if (!firstCollision && collision.gameObject.layer != 6)
         {
             // Check collision speed if moving fast play sound and ignore player collision

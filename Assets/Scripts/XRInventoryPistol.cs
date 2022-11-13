@@ -17,6 +17,8 @@ public class XRInventoryPistol : XRSocketInteractor
 
     private MeshRenderer[] meshRenderers;                           // Need to show/hide for example pistol magazine and bullets inside
 
+    private int _maxAmmo = 3;  // Max ammo inventory size
+
     protected override void Start()
     {
         // Add listener to drag ammo from belt trigger
@@ -50,7 +52,7 @@ public class XRInventoryPistol : XRSocketInteractor
     // Can put in inventory socket only current ammo type and limit by max socket size
     public override bool CanSelect(IXRSelectInteractable interactable)
     {
-        return base.CanSelect(interactable) && interactable.transform.CompareTag(magazineTag) && inventory.Count < Pistol.s_ammoAll;
+        return base.CanSelect(interactable) && (interactable.transform.GetComponent<PistolMagazine>() != null) && inventory.Count < _maxAmmo;
     }
 
     // Put ammo inside inventory socket
@@ -81,12 +83,12 @@ public class XRInventoryPistol : XRSocketInteractor
                 component.enabled = false;
 
         // Update ammo status text
-        ammoText.text = inventory.Count + " / " + Pistol.s_ammoAll;
+        ammoText.text = inventory.Count + " / " + _maxAmmo;
     }
 
     // Hover socket just for selected weapon ammo and in case free place in inventory
     public override bool CanHover(IXRHoverInteractable interactable)
     {
-        return base.CanHover(interactable) && interactable.transform.CompareTag(magazineTag) && inventory.Count < Pistol.s_ammoAll;
+        return base.CanHover(interactable) && (interactable.transform.GetComponent<PistolMagazine>() != null) && inventory.Count < _maxAmmo;
     }
 }

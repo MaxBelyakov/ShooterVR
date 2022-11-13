@@ -1,80 +1,54 @@
-// General class that defines shoot effects (flash, impact, holes).
-// Class is inherited by "MachineGunShoot" and "PistolShoot" classes
-
 using UnityEngine;
-using System.Collections.Generic;
 
-public class ShootEffects : MonoBehaviour
+public class ShootEffects
 {
-    [SerializeField] private GameObject casingPrefab;
-    public GameObject muzzleFlashPrefab;
-    public GameObject bulletPrefab;
+    private IWeapon _weapon;
 
-    [SerializeField] private GameObject impactStandartEffect;
-
-    [SerializeField] private GameObject impactStoneEffect;
-    [SerializeField] private GameObject bulletHoleStoneEffect;
-
-    [SerializeField] private GameObject impactWoodEffect;
-    [SerializeField] private GameObject bulletHoleWoodEffect;
-
-    [SerializeField] private GameObject impactMetalEffect;
-    [SerializeField] private GameObject bulletHoleMetalEffect;
-
-    public AudioClip shotAudio;
-    public AudioClip noBulletsAudio;
-
-    // Impact and hole effects represents by GameObject array. 0-impact, 1-hole
-    public GameObject[] CreateImpactAndHole(Collision collision)
+    public ShootEffects(IWeapon weapon)
     {
-        // Set default impact and hole effects
-        GameObject impactEffect = impactStandartEffect;
-        GameObject bulletHoleEffect = null;
-        
-        // Check the object for wood, stone, metal to choose effect style
-        if (collision.transform.GetComponent<Renderer>() != null)
-        {
-            string materialName = MaterialCheck(collision.transform.GetComponent<Renderer>().material.name);
-            if (materialName == "stone")
-            {
-                impactEffect = impactStoneEffect;
-                bulletHoleEffect = bulletHoleStoneEffect;
-            } else if (materialName == "wood") {
-                impactEffect = impactWoodEffect;
-                bulletHoleEffect = bulletHoleWoodEffect;
-            } else if (materialName == "metal") {
-                impactEffect = impactMetalEffect;
-                bulletHoleEffect = bulletHoleMetalEffect;
-            }
-            if (collision.transform.tag == "chain")
-                bulletHoleEffect = null;
-        }
-        return new GameObject[] {impactEffect, bulletHoleEffect};
+        _weapon = weapon;
     }
 
     // Create Flash effect and Bullet force
     public void ShowShootingEffects(Transform point, float destroyTimer, float range, float shotPower, string weapon_tag)
     {
         // Shot sound effect
-        this.GetComponent<AudioSource>().PlayOneShot(shotAudio);
+        _weapon.PlayAudio(_weapon.ShotAudio);
 
         // Create the muzzle flash
         GameObject tempFlash;
-        tempFlash = Instantiate(muzzleFlashPrefab, point.position, point.rotation);
+        tempFlash = GameObject.Instantiate(_weapon.MuzzleFlashPrefab, point.position, point.rotation);
         // Destroy the muzzle flash effect
-        Destroy(tempFlash, destroyTimer);
+        GameObject.Destroy(tempFlash, destroyTimer);
 
-        // Create bullet and make force
-        GameObject bullet = Instantiate(bulletPrefab, point.position, point.rotation);
-        bullet.GetComponent<Rigidbody>().AddForce(point.forward * shotPower);
-        bullet.transform.tag = weapon_tag;
+        if (_weapon.GetType() == typeof(Shotgun))
+        {
+            // Generate random shotgun bullet points and creates impacts and holes
+            for (int i = 0; i < Shotgun.BuckshotBullets; i++)
+            {
+                // Random buckshot correction
+                Vector3 correction = new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));
+
+                // Create bullet and make force
+                GameObject bullet = GameObject.Instantiate(_weapon.BulletPrefab, point.position + correction, point.rotation);
+                bullet.GetComponent<Rigidbody>().AddForce(point.forward * shotPower);
+                bullet.transform.tag = weapon_tag;
+            }
+        }
+        else
+        {
+            // Create bullet and make force
+            GameObject bullet = GameObject.Instantiate(_weapon.BulletPrefab, point.position, point.rotation);
+            bullet.GetComponent<Rigidbody>().AddForce(point.forward * shotPower);
+            bullet.transform.tag = weapon_tag;
+        }
     }
 
     // Create casing effect
     public void ShowCasingEffects(Transform point, float power)
     {
         //Create the casing
-        GameObject casing = Instantiate(casingPrefab, point.position, point.rotation);
+        GameObject casing = GameObject.Instantiate(_weapon.CasingPrefab, point.position, point.rotation);
         
         //Add force on casing to push it out
         casing.GetComponent<Rigidbody>().AddExplosionForce(Random.Range(power * 0.7f, power), (point.position - point.right * 0.3f - point.up * 0.6f), 1f, 3f);
@@ -82,36 +56,16 @@ public class ShootEffects : MonoBehaviour
         casing.GetComponent<Rigidbody>().AddTorque(new Vector3(0, Random.Range(100f, 500f), Random.Range(100f, 1000f)), ForceMode.Impulse);
     }
 
-    // Define what type of material hit the bullet
-    public string MaterialCheck(string target)
+    public void NoBulletsEffects()
     {
-        // Stone materials
-        List<string> stoneMaterialsList = new List<string>
-        {"stone wall (Instance)", "stone_wall_2_d (Instance)", "stone_wall_3_d (Instance)", "concrete_1_mat (Instance)",
-        "granite_1_d (Instance)"};
-
-        // Wood materials
-        List<string> woodMaterialsList = new List<string>
-        {"laminate (Instance)", "wooden box (Instance)", "wood_1_d (Instance)", "Chairs_MAT (Instance)",
-        "Military target (Instance)", "timber_1_fixed_d (Instance)", "wooden-boards-texture_d (Instance)",
-        "BulletDecalWood (Instance)", "paper (Instance)", "_wood_barrel_mat (Instance)", "bag_mat 2 (Instance)",
-        "wood_3_d (Instance)", "bark_2_d (Instance)", "trunk_1_d (Instance)", "Grass (Instance)", "Bathroom_Oven_MAT (Instance)",
-        "platform_mat_b (Instance)", "Pistol dummy (Instance)", "Machine gun dummy (Instance)", "Shotgun dummy (Instance)",
-        "Bow dummy (Instance)"};
-
-        // Metal materials
-        List<string> metalMaterialsList = new List<string>
-        {"MetalSurface (Instance)", "cont_big_mat_2 (Instance)", "_locker_mat (Instance)", "_mat_lock (Instance)", 
-        "cola_can (Instance)", "barrel_mat_1 (Instance)", "Barrel 1 (Instance)", "walls_mat (Instance)", "iron (Instance)",
-        "dark_iron (Instance)"};
-
-        if (stoneMaterialsList.Contains(target))
-            return "stone";
-        else if (woodMaterialsList.Contains(target))
-            return "wood";
-        else if (metalMaterialsList.Contains(target))
-            return "metal";
-        else
-            return null;
+        // Shot sound effect
+        _weapon.PlayAudio(_weapon.NoBulletsAudio);
     }
+
+    public void ReloadEffects()
+    {
+        // Shot sound effect
+        _weapon.PlayAudio(_weapon.ReloadAudio);
+    }
+
 }

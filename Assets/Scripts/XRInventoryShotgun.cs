@@ -19,6 +19,9 @@ public class XRInventoryShotgun : XRSocketInteractor
 
     private MeshRenderer[] meshRenderers;                           // Need to show/hide for example pistol magazine and bullets inside
 
+    public static int s_ammoAll = 30;                       // Max ammo inventory size
+    public static int s_ammoBox = 10;                       // Amount of bullets in box ammo
+
     protected override void Start()
     {
         // Add listener to drag ammo from belt trigger
@@ -52,7 +55,7 @@ public class XRInventoryShotgun : XRSocketInteractor
     // Can put in inventory socket only current ammo type and limit by max socket size
     public override bool CanSelect(IXRSelectInteractable interactable)
     {
-        return base.CanSelect(interactable) && inventory.Count < Shotgun.s_ammoAll 
+        return base.CanSelect(interactable) && inventory.Count < s_ammoAll 
         && (interactable.transform.CompareTag(magazineTag) || interactable.transform.CompareTag(boxTag));
     }
 
@@ -72,14 +75,14 @@ public class XRInventoryShotgun : XRSocketInteractor
             Destroy(ammo);
             
             // Ammo box contain a collection of single bullets
-            for (int i = 1; i <= Shotgun.s_ammoBox; i++)
+            for (int i = 1; i <= s_ammoBox; i++)
             {
                 ammo = Instantiate(ammoPrefab, args.interactableObject.transform.position, args.interactableObject.transform.rotation);
                 inventory.Add(ammo);
                 ammo.SetActive(false);
                 
                 // Not more than weapon inventory max size
-                if (inventory.Count == Shotgun.s_ammoAll)
+                if (inventory.Count == s_ammoAll)
                     break;
             }
         } else
@@ -106,13 +109,13 @@ public class XRInventoryShotgun : XRSocketInteractor
                 component.enabled = false;
 
         // Update ammo status text
-        ammoText.text = inventory.Count + " / " + Shotgun.s_ammoAll;
+        ammoText.text = inventory.Count + " / " + s_ammoAll;
     }
 
     // Hover socket just for selected weapon ammo and in case free place in inventory
     public override bool CanHover(IXRHoverInteractable interactable)
     {
-        return base.CanHover(interactable) && inventory.Count < Shotgun.s_ammoAll 
+        return base.CanHover(interactable) && inventory.Count < s_ammoAll 
         && (interactable.transform.CompareTag(magazineTag) || interactable.transform.CompareTag(boxTag));
     }
 }

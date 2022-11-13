@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 7760901743872058588}
   - component: {fileID: 6637066224838323065}
   - component: {fileID: 8934983163259379635}
-  - component: {fileID: 7799947002785666158}
   - component: {fileID: 7799947002785666157}
-  - component: {fileID: 7799947002785666156}
+  - component: {fileID: 7732120239685661543}
   - component: {fileID: 6637066224838323066}
+  - component: {fileID: 7799947002785666158}
   m_Layer: 10
   m_Name: ShotgunBody
   m_TagString: Untagged
@@ -89,6 +89,64 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &7799947002785666157
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989467499796659814}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f758c7417a11f14ca9ef210e91130c5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7732120239685661543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989467499796659814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e25017f56b4e93488036f2bb2cc65c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _magazineSockets:
+  - {fileID: 7799947002854811215}
+  - {fileID: 7799947003390682762}
+  _magazineLocation: {fileID: 0}
+  _barrelLocation: {fileID: 7799947002619326072}
+  _casingExitLocation: {fileID: 7799947004026437259}
+  _shotAudio: {fileID: 8300000, guid: b9f4d49d51e115744bfa47f425bf81af, type: 3}
+  _reloadAudio: {fileID: 8300000, guid: 0653cb9957d52b94fb6b46effb65cc62, type: 3}
+  _noBulletsAudio: {fileID: 8300000, guid: 130496eebb7bef745ad3cb9a2ffa05d6, type: 3}
+  _casingPrefab: {fileID: 2960194294793741577, guid: 0ea0810612d9c45458c86a499bec57ff, type: 3}
+  _muzzleFlashPrefab: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+  _bulletPrefab: {fileID: 6804990658058999119, guid: 65c9f6563c561ee4e8905d1e6a32548b, type: 3}
+--- !u!64 &6637066224838323066
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989467499796659814}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3744501094556469539, guid: f62f7dc06bd890d4aab43b8fd635fe02, type: 3}
 --- !u!82 &7799947002785666158
 AudioSource:
   m_ObjectHideFlags: 0
@@ -185,66 +243,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &7799947002785666157
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6989467499796659814}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5f758c7417a11f14ca9ef210e91130c5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7799947002785666156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6989467499796659814}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8ee6308f5937464db74e6258442f103, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  casingPrefab: {fileID: 2960194294793741577, guid: 0ea0810612d9c45458c86a499bec57ff, type: 3}
-  muzzleFlashPrefab: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
-  bulletPrefab: {fileID: 6804990658058999119, guid: 65c9f6563c561ee4e8905d1e6a32548b, type: 3}
-  impactStandartEffect: {fileID: 335601133518758834, guid: 3be9f1cb3ffd2954a8531621ecb95ab8, type: 3}
-  impactStoneEffect: {fileID: 1341869769842038, guid: 8b7a1ffda5bb7474b8fae646c45ce7b4, type: 3}
-  bulletHoleStoneEffect: {fileID: 8837256863699861268, guid: c21aa115606154149877d5abc459d8a8, type: 3}
-  impactWoodEffect: {fileID: 1031560401822814, guid: 3c0b5f221ea995442b9d11dc526de1c0, type: 3}
-  bulletHoleWoodEffect: {fileID: 8326995348892615841, guid: 5dc94c3514c32e64e9c73dea7ceb8b31, type: 3}
-  impactMetalEffect: {fileID: 1892351807075712, guid: 44be68b4fc4366142a9cd1ae1f761ea4, type: 3}
-  bulletHoleMetalEffect: {fileID: 6479256169597744564, guid: 51ac5b3d347f8ac448b91e2bacef46ae, type: 3}
-  shotAudio: {fileID: 8300000, guid: b9f4d49d51e115744bfa47f425bf81af, type: 3}
-  noBulletsAudio: {fileID: 8300000, guid: 130496eebb7bef745ad3cb9a2ffa05d6, type: 3}
-  barrelLocation: {fileID: 7799947002619326072}
-  casingExitLocation: {fileID: 7799947004026437259}
---- !u!64 &6637066224838323066
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6989467499796659814}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3744501094556469539, guid: f62f7dc06bd890d4aab43b8fd635fe02, type: 3}
 --- !u!1 &7799947002619326079
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +382,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7799947002748173713}
   - component: {fileID: 7799947002748173712}
-  - component: {fileID: 7799947002748173714}
   - component: {fileID: 7799947002748173719}
   - component: {fileID: 7799947002748173718}
   m_Layer: 10
@@ -427,24 +424,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7799947002748173714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7799947002748173717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e25017f56b4e93488036f2bb2cc65c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponModel: {fileID: 7760901743872058588}
-  shotgunAmmoPrefab: {fileID: 2914419010663809437, guid: 1eacf52ae8a6cf4479c75d07a268fce6, type: 3}
-  reloadAudio: {fileID: 8300000, guid: 0653cb9957d52b94fb6b46effb65cc62, type: 3}
-  weaponSockets:
-  - {fileID: 7799947002854811215}
-  - {fileID: 7799947003390682762}
 --- !u!114 &7799947002748173719
 MonoBehaviour:
   m_ObjectHideFlags: 0
