@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private bool firstCollision = true;                 // Flag that signal about first collision
+    private bool firstCollision = true;    // Flag that signal about first collision
     private ImpactEffects effects;
 
     private void Start()

@@ -5,18 +5,15 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class XRDirectInteractorEdited : XRDirectInteractor
 {
-    public SphereCollider handCollider;
+    [SerializeField] private SphereCollider handCollider;
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
         // Deactivate hand collider to avoid conflict with weapon colliders
         handCollider.enabled = false;
 
-        // Only for weapons
-        if ((args.interactableObject.transform.tag == "pistol item") ||
-        (args.interactableObject.transform.tag == "machine gun item") ||
-        (args.interactableObject.transform.tag == "shotgun item") ||
-        (args.interactableObject.transform.tag == "bow item"))
+        // Stick in hands only weapons
+        if (args.interactableObject.transform.GetComponentInChildren<IWeapon>() != null)
             selectActionTrigger = XRBaseControllerInteractor.InputTriggerType.Sticky;
         else
             selectActionTrigger = XRBaseControllerInteractor.InputTriggerType.State;

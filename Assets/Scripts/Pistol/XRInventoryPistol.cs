@@ -1,28 +1,28 @@
+// Use List<GameObject> to save current bullets inside ammo that was put in inventory. When you grab, you get the same magazine that you put
+
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-public class XRInventoryMachineGun : XRSocketInteractor
+public class XRInventoryPistol : XRSocketInteractor
 {
-    public XRSimpleInteractable dragInteractable;                   // XRSimpleInteraction component of inventory (need to drag ammo)
+    [SerializeField] private TMP_Text ammoText;                     // Text ammo status in inventory
 
-    private List<GameObject> inventory = new List<GameObject>();    // Inventory collection
-
-    public TMP_Text ammoText;                                       // Text ammo status in inventory
-
-    public AudioClip a_magazineTake;                                // Take magazine sound effect
+    [SerializeField] private AudioClip a_magazineTake;              // Take magazine sound effect
 
     private MeshRenderer[] meshRenderers;                           // Need to show/hide for example pistol magazine and bullets inside
 
-    private static int s_ammoAll = 3;                        // Max ammo inventory size
+    private List<GameObject> inventory = new List<GameObject>();    // Inventory collection
+
+    private int _maxAmmo = 3;                                       // Max ammo inventory size
 
     protected override void Start()
     {
         // Add listener to drag ammo from belt trigger
-        dragInteractable.selectEntered.AddListener(DragAmmo);
+        GetComponent<XRSimpleInteractable>().selectEntered.AddListener(DragAmmo);
 
-        // Collect all mesh render components in inventory socket
+        // Collect bullets mesh render components in pistol magazine
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
     }
 
@@ -38,19 +38,13 @@ public class XRInventoryMachineGun : XRSocketInteractor
             GameObject ammo = inventory[inventory.Count - 1];
             ammo.SetActive(true);
             inventory.Remove(ammo);
-            
+
             // Put ammo in hand (interactor)
             interactionManager.SelectEnter(args.interactorObject, ammo.GetComponent<IXRSelectInteractable>());
 
             // Play sound effect
             GetComponent<AudioSource>().PlayOneShot(a_magazineTake);
         }
-    }
-
-    // Can put in inventory socket only current ammo type and limit by max socket size
-    public override bool CanSelect(IXRSelectInteractable interactable)
-    {
-        return base.CanSelect(interactable) && (interactable.transform.GetComponent<MachineGunMagazine>() != null) && inventory.Count < s_ammoAll;
     }
 
     // Put ammo inside inventory socket
@@ -81,12 +75,18 @@ public class XRInventoryMachineGun : XRSocketInteractor
                 component.enabled = false;
 
         // Update ammo status text
-        ammoText.text = inventory.Count + " / " + s_ammoAll;
+        ammoText.text = inventory.Count + " / " + _maxAmmo;
     }
 
     // Hover socket just for selected weapon ammo and in case free place in inventory
     public override bool CanHover(IXRHoverInteractable interactable)
     {
-        return base.CanHover(interactable) && (interactable.transform.GetComponent<MachineGunMagazine>() != null) && inventory.Count < s_ammoAll;
+        return base.CanHover(interactable) && (interactable.transform.GetComponent<PistolMagazine>() != null) && inventory.Count < _maxAmmo;
+    }
+
+    // Can put in inventory socket only current ammo type and limit by max socket size
+    public override bool CanSelect(IXRSelectInteractable interactable)
+    {
+        return base.CanSelect(interactable) && (interactable.transform.GetComponent<PistolMagazine>() != null) && inventory.Count < _maxAmmo;
     }
 }

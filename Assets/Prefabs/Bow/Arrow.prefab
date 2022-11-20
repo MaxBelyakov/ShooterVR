@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4814513756475213635}
   - component: {fileID: 4814513756475213646}
   - component: {fileID: 4814513756475213634}
+  - component: {fileID: 7575305898228152977}
   - component: {fileID: 4814513756475213632}
   - component: {fileID: 4814513756475213647}
   m_Layer: 10
@@ -80,23 +81,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8587c77eb2ca0184081e1e450beee14d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  casingPrefab: {fileID: 0}
-  muzzleFlashPrefab: {fileID: 0}
-  bulletPrefab: {fileID: 0}
+  firstCollision: 1
+  arrowDropAudio: {fileID: 8300000, guid: 20ddc007dcc6bc548b8311ab1a1be7e1, type: 3}
+--- !u!114 &7575305898228152977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814513756475213640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0737904d7c3904a408111fda6912ce3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   impactStandartEffect: {fileID: 335601133518758834, guid: 3be9f1cb3ffd2954a8531621ecb95ab8, type: 3}
   impactStoneEffect: {fileID: 1341869769842038, guid: 8b7a1ffda5bb7474b8fae646c45ce7b4, type: 3}
-  bulletHoleStoneEffect: {fileID: 0}
+  bulletHoleStoneEffect: {fileID: 8837256863699861268, guid: c21aa115606154149877d5abc459d8a8, type: 3}
   impactWoodEffect: {fileID: 1031560401822814, guid: 3c0b5f221ea995442b9d11dc526de1c0, type: 3}
-  bulletHoleWoodEffect: {fileID: 0}
+  bulletHoleWoodEffect: {fileID: 8326995348892615841, guid: 5dc94c3514c32e64e9c73dea7ceb8b31, type: 3}
   impactMetalEffect: {fileID: 1892351807075712, guid: 44be68b4fc4366142a9cd1ae1f761ea4, type: 3}
-  bulletHoleMetalEffect: {fileID: 0}
-  shotAudio: {fileID: 0}
-  noBulletsAudio: {fileID: 0}
-  firstCollision: 1
-  hitWoodAudio: {fileID: 8300000, guid: 31687626151b36844a058cc73ef77e57, type: 3}
-  impactAudioStandart: {fileID: 8300000, guid: 63213e6b3fe15ad4cb5d40dfaedd01b0, type: 3}
-  impactAudioMetal: {fileID: 8300000, guid: 5a830963ffb79ab419b59804cf67856a, type: 3}
-  dropAudio: {fileID: 8300000, guid: 20ddc007dcc6bc548b8311ab1a1be7e1, type: 3}
+  bulletHoleMetalEffect: {fileID: 6479256169597744564, guid: 51ac5b3d347f8ac448b91e2bacef46ae, type: 3}
+  _arrowImpactWoodAudio: {fileID: 8300000, guid: 31687626151b36844a058cc73ef77e57, type: 3}
+  _arrowImpactStandartAudio: {fileID: 8300000, guid: 63213e6b3fe15ad4cb5d40dfaedd01b0, type: 3}
+  _arrowImpactMetalAudio: {fileID: 8300000, guid: 5a830963ffb79ab419b59804cf67856a, type: 3}
 --- !u!114 &4814513756475213632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +123,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967279
+    m_Bits: 1
   m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
@@ -175,7 +183,7 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 4818299550002969133}
+  m_AttachTransform: {fileID: 0}
   m_AttachEaseInTime: 0.15
   m_MovementType: 2
   m_VelocityDamping: 1

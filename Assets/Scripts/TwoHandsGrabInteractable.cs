@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class TwoHandsGrabInteractable : XRGrabInteractable
 {
-    public XRSimpleInteractable secondHandGrabPoint;            // Second hand grab point
+    [SerializeField] private XRSimpleInteractable secondHandGrabPoint;            // Second hand grab point
     private IXRSelectInteractor firstInteractor;                // First grabbed hand object
     private IXRSelectInteractor secondInteractor;               // Second grabbed hand object
     private IXRSelectInteractable secondInteractable;           // Second grabbed point object

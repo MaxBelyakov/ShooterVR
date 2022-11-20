@@ -14412,7 +14412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e988983f96fe1dd48800bcdfc82f23e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LineWidth: 0.02
+  m_LineWidth: 0.01
   m_OverrideInteractorLineLength: 1
   m_LineLength: 10
   m_WidthCurve:
@@ -14697,7 +14697,7 @@ MonoBehaviour:
   m_SphereCastRadius: 0.1
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 6199
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 0
   m_HoverToSelect: 0
@@ -15715,6 +15715,10 @@ PrefabInstance:
     - target: {fileID: 7799947002748173717, guid: b4396b902f07585439f0e4defdc142ff, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799947002748173717, guid: b4396b902f07585439f0e4defdc142ff, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4396b902f07585439f0e4defdc142ff, type: 3}
@@ -17723,7 +17727,7 @@ GameObject:
   - component: {fileID: 1423143070}
   m_Layer: 6
   m_Name: XR Origin
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17803,7 +17807,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeftHandRayController: {fileID: 1020368332}
   teleportActivationButton: 6
-  activationThreshold: 0.1
 --- !u!1001 &1430314027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23720,8 +23723,8 @@ PrefabInstance:
       value: Wooden Bow
       objectReference: {fileID: 0}
     - target: {fileID: 668254015422572105, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d03c4353fda446d4f8df56d422578d64, type: 3}
@@ -24085,6 +24088,10 @@ PrefabInstance:
     - target: {fileID: 2703359225396864147, guid: 94276ffd044bd124586903782fa7464c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703359225396864147, guid: 94276ffd044bd124586903782fa7464c, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 2703359225396864150, guid: 94276ffd044bd124586903782fa7464c, type: 3}
       propertyPath: m_RootOrder
@@ -25181,7 +25188,6 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  dragInteractable: {fileID: 4801517456379258523}
   ammoText: {fileID: 841527360}
   a_magazineTake: {fileID: 8300000, guid: 9ad42f64b94792642b3c44b7af3a0663, type: 3}
 --- !u!65 &4801517456379258521
@@ -25195,8 +25201,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 15.209234, y: 20.321007, z: 18.164604}
-  m_Center: {x: -1.3469911, y: -0.16752535, z: -0.5873841}
+  m_Size: {x: 15.209233, y: 59.36124, z: 18.164604}
+  m_Center: {x: -1.3469924, y: -18.223598, z: -0.58738226}
 --- !u!54 &4801517456379258522
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25987,7 +25993,6 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  dragInteractable: {fileID: 6016009244624692143}
   ammoPrefab: {fileID: 2914419010663809437, guid: 1eacf52ae8a6cf4479c75d07a268fce6, type: 3}
   ammoText: {fileID: 1491354748}
   a_magazineTake: {fileID: 8300000, guid: 9ad42f64b94792642b3c44b7af3a0663, type: 3}
@@ -26002,8 +26007,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.12288077, y: 0.17166331, z: 0.13181297}
-  m_Center: {x: -0.0037828535, y: 0.047896788, z: 0.009644078}
+  m_Size: {x: 0.12288077, y: 0.17166331, z: 0.5403427}
+  m_Center: {x: -0.0037828533, y: 0.047896788, z: 0.006174444}
 --- !u!54 &6016009244624692146
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26452,7 +26457,6 @@ MonoBehaviour:
   m_SocketActive: 1
   m_InteractableHoverScale: 1
   m_RecycleDelayTime: 1
-  dragInteractable: {fileID: 6824580865129749067}
   ammoText: {fileID: 388086427}
   a_magazineTake: {fileID: 8300000, guid: 9ad42f64b94792642b3c44b7af3a0663, type: 3}
 --- !u!65 &6824580865129749069
@@ -26466,8 +26470,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.12820853, y: 0.17828201, z: 0.13275985}
-  m_Center: {x: 0.01037028, y: 0.042973705, z: 0.0028775192}
+  m_Size: {x: 0.12820853, y: 0.17828201, z: 0.5439604}
+  m_Center: {x: 0.01037032, y: 0.042973705, z: 0.15355103}
 --- !u!54 &6824580865129749070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26598,6 +26602,10 @@ PrefabInstance:
     - target: {fileID: 5147203841662202051, guid: c4dafda7d4d4f6d47a8aeef86c5992aa, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5147203841662202051, guid: c4dafda7d4d4f6d47a8aeef86c5992aa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5150392527647987381, guid: c4dafda7d4d4f6d47a8aeef86c5992aa, type: 3}
       propertyPath: m_RootOrder

@@ -3,29 +3,20 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-public class XRInventoryPistol : XRSocketInteractor
+public class XRInventoryMachineGun : XRSocketInteractor
 {
-    public XRSimpleInteractable dragInteractable;                   // XRSimpleInteraction component of inventory (need to drag ammo)
+    [SerializeField] private TMP_Text ammoText;                     // Text ammo status in inventory
 
-    private string magazineTag = "pistol magazine ammo";            // Ammo tag (need to put in socket just it)
+    [SerializeField] private AudioClip a_magazineTake;              // Take magazine sound effect
 
     private List<GameObject> inventory = new List<GameObject>();    // Inventory collection
 
-    public TMP_Text ammoText;                                       // Text ammo status in inventory
-
-    public AudioClip a_magazineTake;                                // Take magazine sound effect
-
-    private MeshRenderer[] meshRenderers;                           // Need to show/hide for example pistol magazine and bullets inside
-
-    private int _maxAmmo = 3;  // Max ammo inventory size
+    private int _maxAmmo = 3;                                       // Max ammo inventory size
 
     protected override void Start()
     {
         // Add listener to drag ammo from belt trigger
-        dragInteractable.selectEntered.AddListener(DragAmmo);
-
-        // Collect all mesh render components in inventory socket
-        meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        GetComponent<XRSimpleInteractable>().selectEntered.AddListener(DragAmmo);
     }
 
     private void DragAmmo(SelectEnterEventArgs args)
@@ -40,19 +31,13 @@ public class XRInventoryPistol : XRSocketInteractor
             GameObject ammo = inventory[inventory.Count - 1];
             ammo.SetActive(true);
             inventory.Remove(ammo);
-
+            
             // Put ammo in hand (interactor)
             interactionManager.SelectEnter(args.interactorObject, ammo.GetComponent<IXRSelectInteractable>());
 
             // Play sound effect
             GetComponent<AudioSource>().PlayOneShot(a_magazineTake);
         }
-    }
-
-    // Can put in inventory socket only current ammo type and limit by max socket size
-    public override bool CanSelect(IXRSelectInteractable interactable)
-    {
-        return base.CanSelect(interactable) && (interactable.transform.GetComponent<PistolMagazine>() != null) && inventory.Count < _maxAmmo;
     }
 
     // Put ammo inside inventory socket
@@ -76,11 +61,9 @@ public class XRInventoryPistol : XRSocketInteractor
     {
         // Show/hide ammo on belt
         if (inventory.Count > 0)
-            foreach (MeshRenderer component in meshRenderers)
-                component.enabled = true;           
+            GetComponent<MeshRenderer>().enabled = true;         
         else
-            foreach (MeshRenderer component in meshRenderers)
-                component.enabled = false;
+            GetComponent<MeshRenderer>().enabled = false;
 
         // Update ammo status text
         ammoText.text = inventory.Count + " / " + _maxAmmo;
@@ -89,6 +72,12 @@ public class XRInventoryPistol : XRSocketInteractor
     // Hover socket just for selected weapon ammo and in case free place in inventory
     public override bool CanHover(IXRHoverInteractable interactable)
     {
-        return base.CanHover(interactable) && (interactable.transform.GetComponent<PistolMagazine>() != null) && inventory.Count < _maxAmmo;
+        return base.CanHover(interactable) && (interactable.transform.GetComponent<MachineGunMagazine>() != null) && inventory.Count < _maxAmmo;
+    }
+
+    // Can put in inventory socket only current ammo type and limit by max socket size
+    public override bool CanSelect(IXRSelectInteractable interactable)
+    {
+        return base.CanSelect(interactable) && (interactable.transform.GetComponent<MachineGunMagazine>() != null) && inventory.Count < _maxAmmo;
     }
 }

@@ -14,6 +14,12 @@ public class ImpactEffects : MonoBehaviour
     [SerializeField] private GameObject impactMetalEffect;
     [SerializeField] private GameObject bulletHoleMetalEffect;
 
+    [SerializeField] private AudioClip _arrowImpactWoodAudio;                   // Sound of hit arrow in wood
+    [SerializeField] private AudioClip _arrowImpactStandartAudio;               // Sound of standart arrow impact
+    [SerializeField] private AudioClip _arrowImpactMetalAudio;                  // Sound of arrow impact in metal
+
+    private float _arrowDepth = 0.3f;   // Depth that arrow move in target
+
     // Impact and hole effects
     public void CreateImpactAndHole(Transform collision, ContactPoint contactPoint)
     {
@@ -51,6 +57,64 @@ public class ImpactEffects : MonoBehaviour
             GameObject bulletHole = Instantiate(bulletHoleEffect, holePosition, Quaternion.LookRotation(-contactPoint.normal));
             bulletHole.transform.SetParent(collision);
         }
+
+        // Iron chain destroy on hit with no impact and bullet hole effects
+        if (collision.tag == "chain" && collision.GetComponent<HingeJoint>() != null)
+            Destroy(collision.GetComponent<HingeJoint>());
+    }
+
+    public void CreateArrowImpact(Transform collision, ContactPoint contactPoint)
+    {
+        // Set default impact and hole effects
+        GameObject impactEffect = impactStandartEffect;
+        AudioClip impactAudio = _arrowImpactStandartAudio;
+
+        // Check the object for wood, stone, metal to choose effect style
+        if (collision.GetComponent<Renderer>() != null)
+        {
+            string materialName = MaterialCheck(collision.GetComponent<Renderer>().material.name);
+            if (materialName == "stone")
+                impactEffect = impactStoneEffect;
+            else if (materialName == "wood")
+            {
+                impactEffect = impactWoodEffect;
+                impactAudio = _arrowImpactWoodAudio;
+
+                // Stop the arrow
+                transform.GetComponent<Rigidbody>().isKinematic = true;
+
+                // Mark box collider as trigger
+                GetComponent<BoxCollider>().isTrigger = true;
+
+                // Move arrow inside wood
+                transform.Translate(_arrowDepth * Vector3.forward);
+
+                // Stop target velocity and get simple impulse
+                if (collision.transform.GetComponent<Rigidbody>() != null)
+                {
+                    collision.transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    collision.transform.GetComponent<Rigidbody>().AddForce(-Vector3.forward, ForceMode.Impulse);
+                }
+
+                // Fix: arrow become flat when hit the floor. It is because of difference with the floor scale
+                if (collision.transform.GetComponent<Renderer>().material.name == "Grass (Instance)")
+                    transform.parent = collision.transform.parent;
+                else
+                    transform.parent = collision.transform;
+            }
+            else if (materialName == "metal")
+            {
+                impactEffect = impactMetalEffect;
+                impactAudio = _arrowImpactMetalAudio;
+            }
+        }
+
+        // Arrow hit sound
+        transform.GetComponent<AudioSource>().PlayOneShot(impactAudio);
+
+        // Create an impact effect
+        GameObject impact = Instantiate(impactEffect, contactPoint.point, Quaternion.LookRotation(contactPoint.normal));
+        Destroy(impact, 1f);
 
         // Iron chain destroy on hit with no impact and bullet hole effects
         if (collision.tag == "chain" && collision.GetComponent<HingeJoint>() != null)

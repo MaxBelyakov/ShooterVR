@@ -1,5 +1,3 @@
-// Pistol socket interactor controller
-
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class XRSocketInteractorPistol : XRSocketInteractor

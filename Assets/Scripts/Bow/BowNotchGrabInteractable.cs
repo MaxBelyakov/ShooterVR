@@ -1,61 +1,41 @@
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine;
-using System;
-using static Unity.VisualScripting.Antlr3.Runtime.Tree.TreeWizard;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-public class Bow
-{
-    public static int s_ammoAll = 30;                       // Max arrows inventory size
-    public static int s_ammoBox = 10;                       // Amount of arrows in quiver
-    public static float shootSpeed = 350f;                  // Speed of string unstretch
-    public static float arrowSpeedStick = 8f;               // Arrow speed limit when start stick in objects or impact effect
-    public static float arrowDropSpeedLimit = 3f;           // Arrow drop speed limit when can play drop sound
-    public static float inertia = 1000f;                    // String inertia divider
-    public static float forceReducing = 70f;                // Arrow move force reducing value
-    public static float depth = 0.3f;                       // Depth that arrow move in target
-    public static bool s_shooting = false;                  // Global flag, show bow is shooting now
-}
 
 public class BowNotchGrabInteractable : XRGrabInteractable
 {
-    [SerializeField] private XRGrabInteractable bowGrabInteractable;      // Bow Grab Interactable component
+    [SerializeField] private Transform _bowString;
 
-    [SerializeField] private Transform bowBody;                           // Bow main body transform component
-    [SerializeField] private Transform bowString;                         // String start position
+    private Bow _bow;
 
-    private Vector3 stringStart;                        // String start position
-    private Vector3 stringEnd;                          // String end position
+    private Vector3 _stringStart;                        // String start position
+    private Vector3 _stringEnd;                          // String end position
 
-    private float stringPower;                          // String power, depends on string length
-
-    private bool bowFire;                               // There is a difference between "s_shooting" and "bowFire
-                                                        // First show that weapon is working, second - release the string flag
-
-    private bool stringInertia = false;                 // Need to return string in start position after inertia
-
-    public AudioClip shootAudio;                        // Bow shoot sound
+    private float _stringPower;                          // String power, depends on string length
+    private bool _stringForward = false;                 // Start move string forward
+    private bool _stringInertia = false;                 // Return string in start position after inertia
 
     void Start()
     {
+        _bow = transform.parent.GetComponent<Bow>();
+
         // Get string start coordinates
-        stringStart = bowString.localPosition;
-        stringEnd = stringStart + new Vector3(0, 0, -0.0355f);
+        _stringStart = _bowString.localPosition;
+        _stringEnd = _stringStart + new Vector3(0, 0, -0.0355f);
 
         // Add listener for drop bow trigger
-        bowGrabInteractable.selectExited.AddListener(DropStringAndArrow);
+        XRGrabInteractable bowGrab = _bow.transform.parent.parent.GetComponent<XRGrabInteractable>();
+        bowGrab.selectExited.AddListener(DropStringAndArrow);
     }
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
     {
         // Get the notch in hand
-        if (!bowFire && isSelected)
+        if (isSelected)
         {
             // Move string with hand
-            Vector3 newPosition = new Vector3(stringStart.x, stringStart.y, transform.localPosition.z);
-            if (newPosition.z >= stringEnd.z && newPosition.z <= stringStart.z)
-                bowString.localPosition = newPosition;
+            Vector3 newPosition = new Vector3(_stringStart.x, _stringStart.y, transform.localPosition.z);
+            if (newPosition.z >= _stringEnd.z && newPosition.z <= _stringStart.z)
+                _bowString.localPosition = newPosition;
 
             base.ProcessInteractable(updatePhase);
         }
@@ -63,21 +43,21 @@ public class BowNotchGrabInteractable : XRGrabInteractable
 
     void Update()
     {
-        if (bowFire)
+        if (_stringForward)
             StringForward();
 
-        if (stringInertia)
+        if (_stringInertia)
             StringInertia();
     }
 
     // Return string to start position + add inertia, then shoot arrow
     private void StringForward()
     {
-        if (bowString.localPosition.z <= stringStart.z + stringPower / Bow.inertia)
-            bowString.localPosition += new Vector3(0, 0, 0.1f) * Time.deltaTime * stringPower;
+        if (_bowString.localPosition.z <= _stringStart.z + _stringPower / _bow.Inertia)
+            _bowString.localPosition += new Vector3(0, 0, 0.1f) * Time.deltaTime * _stringPower;
         else
         {
-            bowFire = false;
+            _stringForward = false;
             ArrowShoot();
         }
     }
@@ -85,12 +65,11 @@ public class BowNotchGrabInteractable : XRGrabInteractable
     // Return string to start position after inertia
     private void StringInertia()
     {
-        if (bowString.localPosition.z > stringStart.z)
-            bowString.localPosition += new Vector3(0, 0, -0.01f) * Time.deltaTime * stringPower;
+        if (_bowString.localPosition.z > _stringStart.z)
+            _bowString.localPosition += new Vector3(0, 0, -0.01f) * Time.deltaTime * _stringPower;
         else
         {
-            stringInertia = false;
-            Bow.s_shooting = false;
+            _stringInertia = false;
         }
     }
 
@@ -98,7 +77,7 @@ public class BowNotchGrabInteractable : XRGrabInteractable
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
         // Reparent notch back to bow (there is no parenting when grab)
-        transform.parent = bowBody;
+        transform.parent = _bow.transform;
 
         base.OnSelectEntered(args);
     }
@@ -107,17 +86,16 @@ public class BowNotchGrabInteractable : XRGrabInteractable
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
         // Calculate string power. Shoot speed multiplicates with string length
-        float stringPosition = bowString.localPosition.z;
-        stringPower = (Mathf.Abs(stringPosition) - Mathf.Abs(stringStart.z)) * Bow.shootSpeed;
+        float stringPosition = _bowString.localPosition.z;
+        _stringPower = (Mathf.Abs(stringPosition) - Mathf.Abs(_stringStart.z)) * _bow.ShootSpeed;
 
-        // Release string flag
-        bowFire = true;
+        _stringForward = true;
 
         // Shoot sound
-        GetComponent<AudioSource>().PlayOneShot(shootAudio);
+        _bow.PlayAudio(_bow.ShotAudio);
 
         // Return notch to start position
-        transform.localPosition = stringStart;
+        transform.localPosition = _stringStart;
 
         base.OnSelectExited(args);
     }
@@ -125,24 +103,21 @@ public class BowNotchGrabInteractable : XRGrabInteractable
     private void ArrowShoot()
     {
         // Arrow inside the notch socket
-        if (bowString.GetComponent<XRSocketInteractorBow>().hasSelection)
+        if (_bowString.GetComponent<XRSocketInteractorBow>().hasSelection)
         {
             // Select arrow
-            IXRSelectInteractable interactable = bowString.GetComponent<XRSocketInteractorBow>().interactablesSelected[0];
+            IXRSelectInteractable interactable = _bowString.GetComponent<XRSocketInteractorBow>().interactablesSelected[0];
             Transform arrow = interactable.transform;
-
-            // Start shooting flag (before arrow release to avoid socketing again)
-            Bow.s_shooting = true;
 
             // Release arrow
             interactionManager.SelectExit(interactable.interactorsSelecting[0], interactable);
 
             // Give the force to arrow
-            arrow.GetComponent<Rigidbody>().AddForce(arrow.forward * Bow.shootSpeed * stringPower / Bow.forceReducing);
+            arrow.GetComponent<Rigidbody>().AddForce(arrow.forward * _bow.ShootSpeed * _stringPower / _bow.ForceReducing);
         }
 
         // Signal to return string in start position
-        stringInertia = true;
+        _stringInertia = true;
     }
 
     // Listener. Bow drop trigger
@@ -153,9 +128,9 @@ public class BowNotchGrabInteractable : XRGrabInteractable
             interactionManager.SelectExit(interactorsSelecting[0], this);
 
         // Arrow inside the notch socket. Release the arrow
-        if (bowString.GetComponent<XRSocketInteractorBow>().hasSelection)
+        if (_bowString.GetComponent<XRSocketInteractorBow>().hasSelection)
         {
-            IXRSelectInteractable interactable = bowString.GetComponent<XRSocketInteractorBow>().interactablesSelected[0];
+            IXRSelectInteractable interactable = _bowString.GetComponent<XRSocketInteractorBow>().interactablesSelected[0];
             interactionManager.SelectExit(interactable.interactorsSelecting[0], interactable);
         }
     }

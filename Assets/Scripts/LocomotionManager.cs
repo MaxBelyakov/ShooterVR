@@ -1,14 +1,13 @@
 // Script make active teleportation ray when primary button is pressed
-
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class LocomotionManager : MonoBehaviour
 {
-    public XRController LeftHandRayController;                  // Left hand ray
-    public InputHelpers.Button teleportActivationButton;        // Activation button
+    [SerializeField] private XRController LeftHandRayController;                  // Left hand ray
+    [SerializeField] private InputHelpers.Button teleportActivationButton;        // Activation button
 
-    public float activationThreshold = 0.1f;                    // Button threshold
+    private float activationThreshold = 0.1f;                                     // Button threshold
 
     void Update()
     {

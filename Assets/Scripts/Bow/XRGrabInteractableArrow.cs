@@ -7,7 +7,7 @@ public class XRGrabInteractableArrow : XRGrabInteractable
     {
         // Get arrow in hand. Activate box collider and reset first collision flag
         args.interactableObject.transform.GetComponent<BoxCollider>().isTrigger = false;
-        args.interactableObject.transform.GetComponent<Arrow>().firstCollision = true;
+        args.interactableObject.transform.GetComponent<Arrow>().FirstCollision = true;
         
         base.OnSelectEntered(args);
     }

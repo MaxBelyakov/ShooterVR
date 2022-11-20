@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public TMP_Text bulletsText;                        // Text show current value of bullets
+    [SerializeField] private TMP_Text bulletsText;  // Text show current value of bullets
 
-    public Transform headCamera;
+    [SerializeField] private Transform headCamera;
 
     void Update()
     {
