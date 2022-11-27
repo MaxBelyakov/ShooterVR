@@ -16,6 +16,12 @@ TagManager:
   - machine gun bullet
   - shotgun bullet
   - pistol magazine ammo
+  - shotgun item
+  - bow item
+  - machine gun item
+  - pistol item
+  - left hand
+  - right hand
   layers:
   - Default
   - TransparentFX
