@@ -12,13 +12,14 @@ public class AvatarSitting : MonoBehaviour
 
     void Update()
     {
-        if (transform.localPosition.y > 0.3f && transform.localPosition.y < 1.2f)
+        if (transform.localPosition.y > 0.56f && transform.localPosition.y < 1.2f)
         {
             var newPosY = -0.91f * 1.2f / transform.localPosition.y;
             _avatar.transform.localPosition = new Vector3(_avatar.transform.localPosition.x, newPosY, _avatar.transform.localPosition.z);
 
+            float k = -0.78125f * transform.localPosition.y + 1.9375f;
             newPosY = -0.439f * 1.2f / transform.localPosition.y;
-            _additionalOffset.transform.localPosition = new Vector3(_additionalOffset.transform.localPosition.x, newPosY, _additionalOffset.transform.localPosition.z);
+            _additionalOffset.transform.localPosition = new Vector3(_additionalOffset.transform.localPosition.x, newPosY * k, _additionalOffset.transform.localPosition.z);
         }
     }
 }
