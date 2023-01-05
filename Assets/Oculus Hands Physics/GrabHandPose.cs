@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using UnityEditor;
 #endif
 
@@ -7,6 +8,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class GrabHandPose : MonoBehaviour
 {
+    public GhostHands GhostHands;
     public HandData leftHandPose;
     public HandData rightHandPose;
 
@@ -18,22 +20,45 @@ public class GrabHandPose : MonoBehaviour
     private Quaternion[] startingFingerRotations;
     private Quaternion[] finalFingerRotations;
 
+    XRGrabInteractable grabInteractable;
+    public Transform leftAttachTransform;
+    public Transform rightAttachTransform;
+
     void Start()
     {
-        XRGrabInteractable grabInteractable = GetComponent<XRGrabInteractable>();
+        grabInteractable = GetComponent<XRGrabInteractable>();
 
-        grabInteractable.selectEntered.AddListener(SetupPose);
-        grabInteractable.selectExited.AddListener(UnsetPose);
+        grabInteractable.selectEntered.AddListener(GrabWeapon);
+        grabInteractable.selectExited.AddListener(DropWeapon);
+        grabInteractable.hoverEntered.AddListener(HoverWeapon);
 
         leftHandPose.gameObject.SetActive(false);
         rightHandPose.gameObject.SetActive(false);
     }
 
-    public void SetupPose(BaseInteractionEventArgs arg)
+    private void HoverWeapon(HoverEnterEventArgs arg0)
     {
-        if (arg.interactorObject is XRDirectInteractor)
+        if (arg0.interactorObject.transform.CompareTag("left hand"))
+            grabInteractable.attachTransform = leftAttachTransform;
+        else if (arg0.interactorObject.transform.CompareTag("right hand"))
+            grabInteractable.attachTransform = rightAttachTransform;
+    }
+
+    private void DropWeapon(SelectExitEventArgs arg0)
+    {
+        UnsetPose(GhostHands.ghostHandDirectInteractor);
+    }
+
+    private void GrabWeapon(SelectEnterEventArgs arg0)
+    {
+        SetupPose(GhostHands.ghostHandDirectInteractor);
+    }
+
+    public void SetupPose(XRDirectInteractor arg)
+    {
+        if (arg is XRDirectInteractor)
         {
-            HandData handData = arg.interactorObject.transform.GetComponentInChildren<HandData>();
+            HandData handData = arg.transform.GetComponentInChildren<HandData>();
             handData.animator.enabled = false;
 
             if (handData.handType == HandData.HandModelType.Left)
@@ -45,11 +70,11 @@ public class GrabHandPose : MonoBehaviour
         }
     }
 
-    public void UnsetPose(BaseInteractionEventArgs arg)
+    public void UnsetPose(XRDirectInteractor arg)
     {
-        if (arg.interactorObject is XRDirectInteractor)
+        if (arg is XRDirectInteractor)
         {
-            HandData handData = arg.interactorObject.transform.GetComponentInChildren<HandData>();
+            HandData handData = arg.transform.GetComponentInChildren<HandData>();
             handData.animator.enabled = true;
 
             SetHandData(handData, startingHandPosition, startingHandRotation, startingFingerRotations);

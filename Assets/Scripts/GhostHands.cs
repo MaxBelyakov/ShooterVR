@@ -9,40 +9,50 @@ public class GhostHands : MonoBehaviour
     public GameObject ghostHand;
     public Renderer ghostHandRenderer;
     public XRDirectInteractor ghostHandDirectInteractor;
+    public GrabHandPose ghostHandPose;
 
     public XRDirectInteractor avatarHandDirectInteractor;
     public GameObject avatarHand;
     public GameObject avatar;
 
-    private bool _returnAvatarHand = true;
+    public bool IsGhostHands { get; private set; }
 
     void Update()
     {
-        if (Vector3.Distance(avatarHand.transform.position, ghostHand.transform.position) > 0.2f)
+        // Show ghost hands
+        if (Vector3.Distance(avatarHand.transform.position, ghostHand.transform.position) > 0.15f)
         {
-            if (avatarHandDirectInteractor.hasSelection)
+            if (!IsGhostHands)
             {
-                IXRSelectInteractable obj = avatarHandDirectInteractor.interactablesSelected[0];
-                avatarHandDirectInteractor.interactionManager.SelectExit(avatarHandDirectInteractor, obj);
-                ghostHandDirectInteractor.interactionManager.SelectEnter(ghostHandDirectInteractor, obj);
+                if (avatarHandDirectInteractor.hasSelection)
+                {
+                    IXRSelectInteractable obj = avatarHandDirectInteractor.interactablesSelected[0];
+                    avatarHandDirectInteractor.interactionManager.SelectExit(avatarHandDirectInteractor, obj);
+                    ghostHandDirectInteractor.interactionManager.SelectEnter(ghostHandDirectInteractor, obj);
+
+                    ghostHandPose.SetupPose(ghostHandDirectInteractor);
+                }
+
+                avatarHandDirectInteractor.enabled = false;
+                ghostHandDirectInteractor.enabled = true;
+                ghostHandRenderer.enabled = true;
+
+                avatar.SetLayerRecursively(14);
+                ghostHand.SetLayerRecursively(7);
+
+                IsGhostHands = true;
             }
-
-            avatarHandDirectInteractor.enabled = false;
-            ghostHandDirectInteractor.enabled = true;
-            ghostHandRenderer.enabled = true;
-
-            avatar.SetLayerRecursively(14);
-            ghostHand.SetLayerRecursively(7);
-
-            _returnAvatarHand = false;
         }
-        else if (!_returnAvatarHand)
+        // Hide ghost hands
+        else if (IsGhostHands)
         {
             if (ghostHandDirectInteractor.hasSelection)
             {
                 IXRSelectInteractable obj = ghostHandDirectInteractor.interactablesSelected[0];
                 ghostHandDirectInteractor.interactionManager.SelectExit(ghostHandDirectInteractor, obj);
                 avatarHandDirectInteractor.interactionManager.SelectEnter(avatarHandDirectInteractor, obj);
+
+                ghostHandPose.UnsetPose(ghostHandDirectInteractor);
             }
 
             ghostHandDirectInteractor.enabled = false;
@@ -52,13 +62,8 @@ public class GhostHands : MonoBehaviour
             avatar.SetLayerRecursively(7);
             ghostHand.SetLayerRecursively(14);
 
-            _returnAvatarHand = true;
+            IsGhostHands = false;
         }
-
-    }
-
-    private void ProcessInteraction()
-    {
 
     }
 }

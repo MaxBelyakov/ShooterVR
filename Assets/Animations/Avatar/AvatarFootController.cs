@@ -17,17 +17,10 @@ public class AvatarFootController : MonoBehaviour
     RaycastHit hitLeftFoot;
     RaycastHit hitRightFoot;
 
-    private float _leftKneePositionWeight;
-    private Vector3 _leftKneePosition;
-    private float _rightKneePositionWeight;
-    private Vector3 _rightKneePosition;
-
     private void OnAnimatorIK(int layerIndex)
     {
         Vector3 leftFootPos = this.animator.GetIKPosition(AvatarIKGoal.LeftFoot);
         Vector3 rightFootPos = this.animator.GetIKPosition(AvatarIKGoal.RightFoot);
-
-        print("foot: " + rightFootPos);
 
         bool isLeftFootDown;
         bool isRightFootDown;
@@ -68,35 +61,6 @@ public class AvatarFootController : MonoBehaviour
         else
         {
             this.animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 0);
-        }
-
-        // Knee
-        print("left knee: " + this.animator.GetIKHintPosition(AvatarIKHint.LeftKnee));
-
-        Vector3 leftKneePos = this.animator.GetIKHintPosition(AvatarIKHint.LeftKnee);
-        Vector3 rightKneePos = this.animator.GetIKHintPosition(AvatarIKHint.RightKnee);
-
-        if (leftKneePos.y <= 0)
-        {
-            print("setting knee: " + _leftKneePosition);
-            this.animator.SetIKHintPositionWeight(AvatarIKHint.LeftKnee, 1);
-            this.animator.SetIKHintPosition(AvatarIKHint.LeftKnee, _leftKneePosition);
-        }
-        else
-        {
-            _leftKneePositionWeight = this.animator.GetIKHintPositionWeight(AvatarIKHint.LeftKnee);
-            _leftKneePosition = leftKneePos;
-        }
-
-        if (rightKneePos.y <= 0)
-        {
-            this.animator.SetIKHintPositionWeight(AvatarIKHint.RightKnee, 1);
-            this.animator.SetIKHintPosition(AvatarIKHint.RightKnee, _rightKneePosition);
-        }
-        else
-        {
-            _rightKneePositionWeight = this.animator.GetIKHintPositionWeight(AvatarIKHint.RightKnee);
-            _rightKneePosition = rightKneePos;
         }
     }
 }
